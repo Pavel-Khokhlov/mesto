@@ -1,6 +1,6 @@
 # Проект 4: Место
 
-* [ссылка на проектъ](https://pavel-khokhlov.github.io/)
+* [ссылка на проектъ](https://pavel-khokhlov.github.io/mesto/)
 
 ### Обзор
 Создан профиль человека, основавший компанию Ferrari
