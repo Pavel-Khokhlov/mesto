@@ -1,0 +1,6 @@
+.popup__title {
+  margin: 0 0 54px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

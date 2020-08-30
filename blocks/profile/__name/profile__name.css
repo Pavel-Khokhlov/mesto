@@ -1,0 +1,8 @@
+.profile__name {
+  font-weight: 500;
+  font-size: max(27px, min(27px + calc((100vw - 320px) / 29.87), 42px));
+  line-height: 56px;
+  margin: 0;
+  padding: 0;
+  margin-right: 17px;
+}

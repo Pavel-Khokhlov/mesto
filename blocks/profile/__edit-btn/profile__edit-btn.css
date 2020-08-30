@@ -1,0 +1,12 @@
+.profile__edit-btn {
+  width: max(18px, min(18px + calc((100vw - 320px) / 56), 24px));
+  margin-bottom: -4px;
+  box-sizing: border-box;
+  opacity: 1;
+  transition: 0.8s;
+}
+
+.profile__edit-btn:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

@@ -1,0 +1,11 @@
+@import url(__image/place__image.css);
+@import url(__info/place__info.css);
+@import url(__title/place__title.css);
+@import url(__like/place__like.css);
+
+.place {
+  margin: 0;
+  max-width: 282px;
+  background-color: #fff;
+  border-radius: 10px;
+}

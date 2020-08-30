@@ -1,0 +1,13 @@
+/* {
+  border: 1px red solid;
+}*/
+
+.root {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-style: normal;
+  color: #fff;
+  background-color: #000;
+  /* плавное изменение внутренних отступов после ширины окна 768 px */
+  padding-top: max(28px, min(28px + calc((100vw - 320px) / 26.35), 45px));
+  padding-bottom: max(36px, min(36px + calc((100vw - 320px) / 18.7), 60px));
+}

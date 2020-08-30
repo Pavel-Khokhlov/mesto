@@ -1,0 +1,20 @@
+.places {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(3, 282px);
+  gap:18px 20px;
+  margin-bottom: max(48px, min(48px + calc((100vw - 320px) / 24.88), 66px));
+}
+
+@media only screen and (max-width: 917px) {
+  .places {
+    grid-template-columns: repeat(2, 282px);
+  }
+}
+
+@media only screen and (max-width: 617px) {
+  .places {
+    grid-template-columns: 282px;
+  }
+}
