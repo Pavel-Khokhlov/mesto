@@ -1,4 +1,5 @@
 let myPopup = document.querySelector(".popup");
+let popupForm = document.querySelector(".popup__container");
 let editBtn = document.querySelector(".profile__edit-btn");
 let closeBtn = document.querySelector(".popup__close-btn");
 let nameProfile = document.querySelector(".profile__name");
@@ -13,7 +14,7 @@ function openPopup() {
 }
 
 function closePopup() {
-  document.myForm.reset();
+  popupForm.reset();
   myPopup.classList.remove("popup_opened");
 }
 
