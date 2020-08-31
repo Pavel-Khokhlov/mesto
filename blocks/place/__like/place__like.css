@@ -1,9 +1,0 @@
-.place__like {
-  width: 20.76px;
-  transition: 0.8s;
-}
-
-.place__like:hover {
-  opacity: 0.6;
-  cursor: pointer;
-}

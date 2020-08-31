@@ -1,7 +1,7 @@
 @import url(__image/place__image.css);
 @import url(__info/place__info.css);
 @import url(__title/place__title.css);
-@import url(__like/place__like.css);
+@import url(__like-btn/place__like-btn.css);
 
 .place {
   margin: 0;

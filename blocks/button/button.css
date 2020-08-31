@@ -1,0 +1,14 @@
+@import url(__image/button__image.css);
+
+.button {
+  background: none;
+  box-shadow: none;
+  box-sizing: border-box;
+  opacity: 1;
+  transition: 0.8s;
+}
+
+.button:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}

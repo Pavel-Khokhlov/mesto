@@ -1,6 +1,6 @@
 .profile__block-name {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   margin-bottom: 16px;
 }
 

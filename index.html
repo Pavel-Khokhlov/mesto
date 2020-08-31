@@ -25,14 +25,17 @@
 
     <section class="profile">
       <img src="./images/энцо феррари.jpg" alt="энцо феррари портрет" class="profile__avatar">
-      <nav class="profile__info">
+      <div class="profile__info">
         <div class="profile__block-name">
           <h1 class="profile__name">Энцо Феррари</h1>
-          <input type="image" src="./images/edit btn.svg" alt="кнопка редактировать профиль" class="profile__edit-btn">
+          <button type="button" class="button profile__edit-btn">
+            <img src="./images/edit btn.svg" class="button__image" alt="кнопка редактировать профиль">
+          </button>
         </div>
-        <h2 class="profile__job">Основатель компании</h2>
-      </nav>
-      <input type="image" src="./images/add btn.svg" alt="кнопка добавить место" class="profile__add-place">
+        <p class="profile__job">Основатель компании</p>
+      </div>
+      <button type="button" class="button profile__add-btn"><img src="./images/add btn.svg"
+          alt="кнопка добавить место"></button>
     </section>
 
     <!-- PLACES -->
@@ -41,43 +44,54 @@
       <figure class="place">
         <img src="./images/lmaranello.jpg" alt="штаб квартира феррари" class="place__image">
         <figcaption class="place__info">
-          <h2 class="place__title title-h3">Штаб квартира</h2>
-          <input type="image" src="./images/like.svg" alt="кнопка like" class="place__like">
+          <h2 class="place__title title-h2">Штаб квартира</h2>
+          <button type="button" class="button place__like-btn"><img src="./images/like.svg" class="button__image"
+              alt="кнопка like"></button>
         </figcaption>
       </figure>
       <figure class="place">
         <img src="./images/Ferrari-World.jpg" alt="феррари парк абу-даби" class="place__image">
         <figcaption class="place__info">
-          <h2 class="place__title title-h3">Феррари парк</h2>
-          <input type="image" src="./images/like.svg" alt="кнопка like" class="place__like">
+          <h2 class="place__title title-h2">Феррари парк</h2>
+          <button type="button" class="button place__like-btn">
+            <img src="./images/like.svg" class="button__image" alt="кнопка like">
+          </button>
         </figcaption>
       </figure>
       <figure class="place">
         <img src="./images/812-Superfast.jpg" alt="феррари 812 машина" class="place__image">
         <figcaption class="place__info">
-          <h2 class="place__title title-h3">Ferrari 812</h2>
-          <input type="image" src="./images/like.svg" alt="кнопка like" class="place__like">
+          <h2 class="place__title title-h2">Ferrari 812</h2>
+          <button type="button" class="button place__like-btn">
+            <img src="./images/like.svg" class="button__image" alt="кнопка like">
+          </button>
         </figcaption>
       </figure>
       <figure class="place">
         <img src="./images/Formula 1.jpg" alt="команда формула1" class="place__image">
         <figcaption class="place__info">
-          <h2 class="place__title title-h3">Команда Formula-1</h2>
-          <input type="image" src="./images/like.svg" alt="кнопка like" class="place__like">
+          <h2 class="place__title title-h2">Команда Formula-1</h2>
+          <button type="button" class="button place__like-btn">
+            <img src="./images/like.svg" class="button__image" alt="кнопка like">
+          </button>
         </figcaption>
       </figure>
       <figure class="place">
         <img src="./images/schumacher.jpg" alt="михаэль шумахер" class="place__image">
         <figcaption class="place__info">
-          <h2 class="place__title title-h3">Михаэль Шумахер</h2>
-          <input type="image" src="./images/like.svg" alt="кнопка like" class="place__like">
+          <h2 class="place__title title-h2">Михаэль Шумахер</h2>
+          <button type="button" class="button place__like-btn">
+            <img src="./images/like.svg" class="button__image" alt="кнопка like">
+          </button>
         </figcaption>
       </figure>
       <figure class="place">
         <img src="./images/museo.jpg" alt="музей феррари" class="place__image">
         <figcaption class="place__info">
-          <h2 class="place__title title-h3">Museo Ferrari</h2>
-          <input type="image" src="./images/like.svg" alt="кнопка like" class="place__like">
+          <h2 class="place__title title-h2">Museo Ferrari</h2>
+          <button type="button" class="button place__like-btn">
+            <img src="./images/like.svg" class="button__image" alt="кнопка like">
+          </button>
         </figcaption>
       </figure>
     </section>
@@ -94,11 +108,13 @@
 
   <section class="popup">
     <form class="popup__container">
-      <input type="image" src="./images/close btn.svg" alt="закрыть" class="popup__close-btn">
-      <h3 class="popup__title title-h3">Редактировать профиль</h3>
+      <button type="button" class="button popup__close-btn">
+        <img src="./images/close btn.svg" class="button__image" alt="кнопка закрыть">
+      </button>
+      <h2 class="popup__title title-h2">Редактировать профиль</h2>
       <input type="text" class="popup__input-name">
       <input type="text" class="popup__input-job">
-      <input type="submit" class="popup__save-btn" value="Сохранить">
+      <button type="button" class="button popup__save-btn">Сохранить</button>
     </form>
   </section>
 

@@ -1,12 +1,11 @@
 .profile__edit-btn {
   width: max(18px, min(18px + calc((100vw - 320px) / 56), 24px));
-  margin-bottom: -4px;
-  box-sizing: border-box;
-  opacity: 1;
-  transition: 0.8s;
+  height: max(18px, min(18px + calc((100vw - 320px) / 56), 24px));
+  border: none;
+  padding: 0;
+  margin-bottom: max(13px, min(13px + calc((768px - 100vw) / 74.7), 19px));
 }
 
-.profile__edit-btn:hover {
-  opacity: 0.6;
-  cursor: pointer;
+.profile__edit-btn img {
+  width: 100%;
 }
