@@ -1,10 +1,11 @@
 .popup__close-btn {
   position: absolute;
-  padding: 0;
+  width: 33px;
+  height: 33px;
   border: none;
   top: -33px;
   right: -33px;
-  transition: 0.8s;
+  background-image: url(../../../images/close_btn.svg);
 }
 
 @media only screen and (max-width: 768px) {
