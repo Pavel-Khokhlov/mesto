@@ -3,11 +3,15 @@
   font-size: max(14px, min(14px + calc((100vw - 320px) / 112), 18px));
   line-height: 22px;
   margin: 0;
-  padding: 0;
+  max-width: max(400px, min((400px + calc(100vw - 768px) / 1), 514px));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 @media only screen and (max-width: 767px) {
   .profile__job {
     text-align: center;
+    max-width: max(282px, min((282px + calc(100vw - 320px) / 1), 729px));
   }
 }

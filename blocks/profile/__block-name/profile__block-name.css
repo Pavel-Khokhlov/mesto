@@ -6,6 +6,7 @@
 
 @media only screen and (max-width: 767px) {
   .profile__block-name {
+    margin: 0 auto;
     margin-bottom: 14px;
   }
 }
