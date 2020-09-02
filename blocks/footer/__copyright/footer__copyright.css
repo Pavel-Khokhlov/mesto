@@ -1,6 +1,6 @@
-.footer__copyright{
-  font-size: 18px;
-  line-height: 22px;
+.footer__copyright {
+  font-size: max(14px, min(14px + calc((100vw - 320px) / 112), 18px));
+  line-height: max(17px, min(17px + calc((100vw - 320px) / 89.6), 22px));
   color: #545454;
   margin: 0;
   padding-left: max(0px, min(0px + calc((920px - 100vw) / 2), 19px));
