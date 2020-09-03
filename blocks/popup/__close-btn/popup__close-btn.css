@@ -2,6 +2,8 @@
   position: absolute;
   width: 33px;
   height: 33px;
+  padding: 0;
+  margin: 0;
   border: none;
   top: -33px;
   right: -33px;
