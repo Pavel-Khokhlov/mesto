@@ -2,8 +2,10 @@
 @import url(__info/place__info.css);
 @import url(__title/place__title.css);
 @import url(__like-btn/place__like-btn.css);
+@import url(__del-btn/place__del-btn.css);
 
 .place {
+  position: relative;
   margin: 0;
   max-width: 282px;
   background-color: #fff;

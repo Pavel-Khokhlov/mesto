@@ -8,6 +8,7 @@
   background-position: center;
   background-size: 100%;
   border: none;
+  outline: none;
   opacity: 1;
   transition: 0.8s;
 }
