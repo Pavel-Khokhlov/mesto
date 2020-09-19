@@ -52,9 +52,16 @@ function handleDelete(event) {
   render();
 }
 
+function handleLike(event) {
+  event.target.classList.toggle('place__like-btn_active');
+}
+
 function btnListener() {
   document.querySelectorAll('.place__del-btn').forEach((btn) => {
-  btn.addEventListener('click', handleDelete);
+  btn.addEventListener('click', handleDelete)
+  });
+  document.querySelectorAll('.place__like-btn').forEach((btn) => {
+  btn.addEventListener('click', handleLike)
   });
 }
 
