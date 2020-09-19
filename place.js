@@ -27,19 +27,35 @@ const initialPlaces = [
 
 const placeTemplate = document.querySelector('.place-template').content;
 const placesList = document.querySelector('.places');
-const placeTitle = document.querySelector(".place__title");
-const placeImage = document.querySelector(".place__image");
+const deleteBtn = document.querySelector(".place__del-btn");
+const likeBtn = document.querySelector(".place__like-btn");
 
 function render() {
   placesList.innerHTML = "";
-	initialPlaces.forEach(renderPlace);
+  initialPlaces.forEach(renderPlace);
+
+  btnListener();
 }
 
-function renderPlace({name, link}) {
+function renderPlace({name, link}, index) {
 	const newPlace = placeTemplate.cloneNode(true);
   newPlace.querySelector('.place__title').innerText = name;
   newPlace.querySelector('.place__image').src = link;
-	placesList.appendChild(newPlace);
+  newPlace.querySelector('.place__image').alt = name;
+  newPlace.querySelector('.place').setAttribute('id', index);
+  placesList.appendChild(newPlace);
+}
+
+function handleDelete(event) {
+  const index = event.target.parentNode.getAttribute('id');
+  initialPlaces.splice(index, 1);
+  render();
+}
+
+function btnListener() {
+  document.querySelectorAll('.place__del-btn').forEach((btn) => {
+  btn.addEventListener('click', handleDelete);
+  });
 }
 
 render();

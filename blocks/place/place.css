@@ -3,6 +3,7 @@
 @import url(__title/place__title.css);
 @import url(__like-btn/place__like-btn.css);
 @import url(__del-btn/place__del-btn.css);
+@import url(__like-btn/_active/place__like-btn_active.css);
 
 .place {
   position: relative;
