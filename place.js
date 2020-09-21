@@ -40,12 +40,11 @@ function render() {
   btnListener();
 }
 
-function renderPlace({ name, link }, index) {
+function renderPlace({ name, link }) {
   const newPlace = placeTemplate.cloneNode(true);
   newPlace.querySelector(".place__title").innerText = name;
   newPlace.querySelector(".place__image").src = link;
   newPlace.querySelector(".place__image").alt = name;
-  newPlace.querySelector(".place").setAttribute("id", index);
   placesList.appendChild(newPlace);
 }
 
@@ -72,16 +71,23 @@ function handleLike(event) {
 function btnListener() {
   document.querySelectorAll(".place__del-btn").forEach((btn) => {
     btn.addEventListener("click", function () {
-      const delPlace = btn.closest(".place"); 
+      const delPlace = btn.closest(".place");
       delPlace.remove();
     });
   });
   document.querySelectorAll(".place__like-btn").forEach((btn) => {
     btn.addEventListener("click", handleLike);
   });
+  document.querySelectorAll(".place__image").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      document.querySelector(".popup-zoom__image").src = btn.src;
+      document.querySelector(".popup-zoom__caption").innerText = btn.alt;
+      openZoomPopup();
+    });
+  });
 }
 
-/* Обработчик кнопки Новое место */
+// Обработчик кнопки Новое место
 
 function openAddPlace() {
   nameInput.setAttribute("value", nameProfile.textContent);
@@ -89,12 +95,27 @@ function openAddPlace() {
   newPlace.classList.add("popup_opened");
 }
 
+// Функция закрытия ADD PLACE POPUP
+
 function closeAddPopup() {
   newPlaceForm.reset();
   newPlace.classList.remove("popup_opened");
 }
 
+// Функция открытия и закрытия ZOOM POPUP
+zoomImage = document.querySelector(".popup-zoom");
+closeBtnZoom = zoomImage.querySelector(".popup__close-btn");
+
+function openZoomPopup() {
+  zoomImage.classList.add("popup_opened");
+}
+
+function closeZoomPopup() {
+  zoomImage.classList.remove("popup_opened");
+}
+
 addBtn.addEventListener("click", openAddPlace);
 closeBtnAdd.addEventListener("click", closeAddPopup);
+closeBtnZoom.addEventListener("click", closeZoomPopup);
 formAddSubmit.addEventListener("click", formSubmitPlace);
 render();
