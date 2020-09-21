@@ -48,16 +48,38 @@
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
 
-  <!-- POPUP -->
+  <!-- POPUP EDIT PROFILE -->
 
-  <section class="popup">
+  <section class="popup popup_edit-profile">
     <form class="popup__container">
       <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" name="fullname" class="popup__input-name" placeholder="Имя Фамилия">
-      <input type="text" name="jobposition" class="popup__input-job" placeholder="Профессия или должность">
+      <input type="text" name="fullname" class="popup__input popup__input_name-profile" placeholder="Имя Фамилия">
+      <input type="text" name="jobposition" class="popup__input popup__input_job-profile" placeholder="Профессия или должность">
       <button type="button" class="popup__save-btn" aria-label="Сохранить новый профиль">Сохранить</button>
     </form>
+  </section>
+
+<!-- POPUP ADD PLACE -->
+
+  <section class="popup popup_add-place">
+    <form class="popup__container">
+      <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <input type="text" name="placename" class="popup__input popup__input_name-place" placeholder="Название">
+      <input type="text" name="placelink" class="popup__input popup__input_link-place" placeholder="Ссылка на картинку">
+      <button type="button" class="popup__save-btn" aria-label="Сохранить новый профиль">Создать</button>
+    </form>
+  </section>
+
+  <!-- POPUP ZOOM PHOTO -->
+
+  <section class="popup popup-zoom">
+      <button type="button" class="button popup-zoom__close-btn" aria-label="Вернуться на страницу"></button>
+      <figure class="popup-zoom__container">
+        <img src="link" alt="name" class="popup-zoom__image">
+        <figcaption class="popup-zoom__caption">name</figcaption>
+      </figure>
   </section>
 
    <!-- PLACE TEMPLATE -->

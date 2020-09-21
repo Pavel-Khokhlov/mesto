@@ -1,18 +1,23 @@
 @import url(__container/popup__container.css);
 @import url(__title/popup__title.css);
-@import url(__input-name/popup__input-name.css);
-@import url(__input-job/popup__input-job.css);
+@import url(__imput/popup__input.css);
 @import url(__close-btn/popup__close-btn.css);
 @import url(__save-btn/popup__save-btn.css);
+@import url(__imput/_name-profile/popup__input_name-profile.css);
+@import url(__imput/_job-profile/popup__input_job-profile.css);
+@import url(__imput/_name-place/popup__input_name-place.css);
+@import url(__imput/_link-place/popup__input_link-place.css);
 
 .popup {
   background-color: rgba(0, 0, 0, 0.8);
   position: fixed;
-  top: 0;
+  top: -100%;
   left: 0;
   bottom: 0;
   right: 0;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: 0.8s ease-in-out;
 }
 
 @media only screen and (max-width: 768px) {
