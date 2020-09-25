@@ -105,10 +105,16 @@ const formSubmitProfile = (event) => {
   nameProfile.textContent = getName;
   jobProfile.textContent = getJob;
   popupClose(popupEditProfile);
+  formProfile.reset();
 };
 
 // функция добавления нового места
-function formSubmitPlace(name, link,) {
+const formSubmitPlace = (event) => {
+  event.preventDefault();
+  formSubmitNewPlace();
+};
+
+function formSubmitNewPlace(name, link) {
   const addNewPlace = createPlace(name, link);
   const addTitle = addNewPlace.querySelector(".place__title");
   const addImage = addNewPlace.querySelector(".place__image");
@@ -126,6 +132,7 @@ function formSubmitPlace(name, link,) {
     .addEventListener("click", handleZoom);
   placesList.prepend(addNewPlace);
   popupClose(popupAddPlace);
+  formPlace.reset();
 }
 
 // функция открытия popup
@@ -136,13 +143,7 @@ function popupOpen(popup) {
 
 // функция закрытия popup
 function popupClose(popup) {
-  formSubmitReset();
   popup.classList.remove("popup_opened");
-}
-
-function formSubmitReset() {
-  formProfile.reset();
-  formPlace.reset();
 }
 
 buttonEditProfile.addEventListener("click", editProfile);
