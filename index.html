@@ -28,7 +28,7 @@
       <img src="./images/enzoferrari.jpg" alt="энцо феррари портрет" class="profile__avatar">
       <div class="profile__info">
         <div class="profile__block-name">
-          <h1 class="profile__name">Энцо Феррари</h1>
+          <h1 class="profile__name" valu>Энцо Феррари</h1>
           <button type="button" class="button profile__edit-btn" aria-label="Редактировать профиль"></button>
         </div>
         <p class="profile__job">Основатель компании</p>
@@ -51,11 +51,11 @@
   <!-- POPUP EDIT PROFILE -->
 
   <section class="popup popup_edit-profile">
-    <form class="popup__container">
+    <form class="popup__container" method="POST">
       <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" name="fullname" class="popup__input popup__input_name-profile" placeholder="Имя Фамилия">
-      <input type="text" name="jobposition" class="popup__input popup__input_job-profile" placeholder="Профессия или должность">
+      <input type="text" name="fullname" class="popup__input popup__input_name-profile" placeholder="Имя Фамилия" autocomplete="off">
+      <input type="text" name="jobposition" class="popup__input popup__input_job-profile" placeholder="Профессия или должность" autocomplete="off">
       <button type="submit" class="popup__save-btn" aria-label="Сохранить новый профиль">Сохранить</button>
     </form>
   </section>
@@ -63,11 +63,11 @@
 <!-- POPUP ADD PLACE -->
 
   <section class="popup popup_add-place">
-    <form class="popup__container">
+    <form class="popup__container" method="POST">
       <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
       <h2 class="popup__title">Новое место</h2>
-      <input type="text" name="placename" class="popup__input popup__input_name-place" placeholder="Название">
-      <input type="text" name="placelink" class="popup__input popup__input_link-place" placeholder="Ссылка на картинку">
+      <input type="text" name="placename" class="popup__input popup__input_name-place" placeholder="Название" autocomplete="off">
+      <input type="text" name="placelink" class="popup__input popup__input_link-place" placeholder="Ссылка на картинку" autocomplete="off">
       <button type="submit" class="popup__save-btn" aria-label="Добавить новое место">Создать</button>
     </form>
   </section>
