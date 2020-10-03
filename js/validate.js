@@ -3,6 +3,7 @@ const showInputError = (formElement, inputElement, errorMessage, params) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   errorElement.textContent = errorMessage;
   errorElement.classList.add(params.activeErrorClass);
+  inputElement.classList.add(params.inputInvalidClass);
 };
 
 // Функция скрыть ошибку ввода
@@ -10,6 +11,7 @@ const hideInputError = (formElement, inputElement, params) => {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
   errorElement.textContent = "";
   errorElement.classList.remove(params.activeErrorClass);
+  inputElement.classList.remove(params.inputInvalidClass);
 };
 
 // Функция изменения кнопки отправки

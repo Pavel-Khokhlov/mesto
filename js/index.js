@@ -5,7 +5,7 @@ const placesList = document.querySelector(".places");
 const buttonEditProfile = document.querySelector(".profile__edit-btn");
 const buttonAddPlace = document.querySelector(".profile__add-btn");
 const buttonClosePopup = document.querySelectorAll(".popup__close-btn");
-const overlayClosePopup = document.querySelectorAll(".popup-close")
+const overlayClosePopup = document.querySelectorAll(".popup-close");
 
 // POPUP PROFILE CONST
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -93,6 +93,7 @@ function readProfileData() {
 }
 
 const editProfile = () => {
+  formProfile.reset();
   readProfileData();
   popupOpen(popupEditProfile);
 };
@@ -113,9 +114,11 @@ function popupOpen(popup) {
   });
   // Слушаем клик по overlay
   popup.addEventListener("click", function (evt) {
-    console.log(evt);
-    if(!evt.target.closest(".popup__container") && !evt.target.closest(".popup-zoom__container")) {
-      popupClose(popup); 
+    if (
+      !evt.target.closest(".popup__container") &&
+      !evt.target.closest(".popup-zoom__container")
+    ) {
+      popupClose(popup);
     }
   });
 }
