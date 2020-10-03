@@ -5,6 +5,7 @@ const placesList = document.querySelector(".places");
 const buttonEditProfile = document.querySelector(".profile__edit-btn");
 const buttonAddPlace = document.querySelector(".profile__add-btn");
 const buttonClosePopup = document.querySelectorAll(".popup__close-btn");
+const overlayClosePopup = document.querySelectorAll(".popup-close")
 
 // POPUP PROFILE CONST
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -56,6 +57,7 @@ const createPlace = (name, link) => {
   newImage.addEventListener("click", handleZoom);
   return newPlace;
 };
+
 // SUBMIT NEW PLACE
 const formSubmitNewPlace = () => {
   const newPlace = createPlace(placeNameInput.value, placeLinkInput.value);
@@ -103,6 +105,19 @@ const addPlace = () => {
 // функция открытия popup
 function popupOpen(popup) {
   popup.classList.add("popup_opened");
+  // Слушаем клавишу ESC
+  document.addEventListener("keydown", function (evt) {
+    if (evt.key === "Escape") {
+      popupClose(popup);
+    }
+  });
+  // Слушаем клик по overlay
+  popup.addEventListener("click", function (evt) {
+    console.log(evt);
+    if(!evt.target.closest(".popup__container") && !evt.target.closest(".popup-zoom__container")) {
+      popupClose(popup); 
+    }
+  });
 }
 
 // функция закрытия popup
@@ -124,14 +139,17 @@ closeButtonListener();
 
 buttonEditProfile.addEventListener("click", editProfile);
 buttonAddPlace.addEventListener("click", addPlace);
+
 formProfile.addEventListener("submit", function (event) {
   event.preventDefault();
   formSubmitProfile();
   popupClose(popupEditProfile);
 });
+
 formPlace.addEventListener("submit", function (event) {
   event.preventDefault();
   formSubmitNewPlace();
   popupClose(popupAddPlace);
 });
+
 render();

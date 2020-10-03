@@ -1,12 +1,10 @@
 @import url(__container/popup__container.css);
 @import url(__title/popup__title.css);
 @import url(__imput/popup__input.css);
+@import url(__input-error/popup__input-error.css);
 @import url(__close-btn/popup__close-btn.css);
 @import url(__save-btn/popup__save-btn.css);
-@import url(__imput/_name-profile/popup__input_name-profile.css);
-@import url(__imput/_job-profile/popup__input_job-profile.css);
-@import url(__imput/_name-place/popup__input_name-place.css);
-@import url(__imput/_link-place/popup__input_link-place.css);
+@import url(__save-btn/_inactive/popup__save-btn_inactive.css);
 
 .popup {
   background-color: rgba(0, 0, 0, 0.8);
@@ -22,6 +20,6 @@
 
 @media only screen and (max-width: 768px) {
   .popup {
-    padding: 0 40px;
+    padding: 0 50px;
   }
 }
