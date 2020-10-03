@@ -95,18 +95,35 @@ function readProfileData() {
 const editProfile = () => {
   formProfile.reset();
   readProfileData();
+  resetErrorState(formProfile);
+  buttonSubmitProfile.classList.remove('popup__save-btn_inactive');
   popupOpen(popupEditProfile);
 };
 
 const addPlace = () => {
   formPlace.reset();
+  resetErrorState(formPlace);
   popupOpen(popupAddPlace);
+};
+
+// Функция обнуления и скрытия errorMessage при открытии popup
+const resetErrorState = (form) => {
+  const inputArea = form.querySelectorAll(".popup__input");
+  console.log(inputArea);
+  inputArea.forEach((inputElement) => {
+    inputElement.classList.remove("popup__input_invalid");
+  });
+  const errorArea = form.querySelectorAll('.popup__input-error');
+  console.log(errorArea);
+  errorArea.forEach((errorElement) => {
+    errorElement.classList.remove("popup__input-error_active");
+  });
 };
 
 // функция открытия popup
 function popupOpen(popup) {
   popup.classList.add("popup_opened");
-  // Слушаем клавишу ESC
+  // Слушаем нажатие клавиши ESC
   document.addEventListener("keydown", function (evt) {
     if (evt.key === "Escape") {
       popupClose(popup);

@@ -6,6 +6,7 @@
 @import url(__save-btn/popup__save-btn.css);
 @import url(__save-btn/_inactive/popup__save-btn_inactive.css);
 @import url(__imput/_invalid/popup__input_invalid.css);
+@import url(__input-error/_active/popup__input-error_active.css);
 
 .popup {
   background-color: rgba(0, 0, 0, 0.8);

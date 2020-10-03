@@ -3,7 +3,7 @@
   font-weight: normal;
   line-height: 12px;
   color: #ff0000;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.8s;
   min-height: 30px;
   margin: 0 0 10px;
