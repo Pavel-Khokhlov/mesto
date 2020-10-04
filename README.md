@@ -1,3 +1,15 @@
+Работа над ошибками
+* удалил неиспользуемые константы
+* переименовал названия функций formSubmitNewPlace и formSubmitProfile на submitNewPlaceForm и submitProfileForm
+* удалил console.log (забыл, спешка отправить работу)
+* переименовал функции popupOpen & popupClose на openPopup & closePopup
+* исправил zoomCaption.textContent = event.target.alt;
+* исправил event.target.closest(".place").remove();
+* убрал полные ресеты форм, добавил обнуление инпутов
+* исправил закрытие popup по клавише ESC (добавляю и удаляю слушатель)
+* повесил шлушатель на каждый popup
+
+
 # Проект 6: Место (Гараж Ferrari)
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)

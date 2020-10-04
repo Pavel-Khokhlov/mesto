@@ -4,8 +4,6 @@ const placesList = document.querySelector(".places");
 // BUTTONs POPUP CONST
 const buttonEditProfile = document.querySelector(".profile__edit-btn");
 const buttonAddPlace = document.querySelector(".profile__add-btn");
-const buttonClosePopup = document.querySelectorAll(".popup__close-btn");
-const overlayClosePopup = document.querySelectorAll(".popup-close");
 
 // POPUP PROFILE CONST
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -21,7 +19,6 @@ const popupAddPlace = document.querySelector(".popup_add-place");
 const formPlace = popupAddPlace.querySelector(".popup__container");
 const placeNameInput = document.querySelector(".popup__input_name-place");
 const placeLinkInput = document.querySelector(".popup__input_link-place");
-const buttonSubmitPlace = popupAddPlace.querySelector(".popup__save-btn");
 
 // POPUP ZOOM CONST
 const popupZoom = document.querySelector(".popup-zoom");
@@ -59,13 +56,13 @@ const createPlace = (name, link) => {
 };
 
 // SUBMIT NEW PLACE
-const formSubmitNewPlace = () => {
+const submitNewPlaceForm = () => {
   const newPlace = createPlace(placeNameInput.value, placeLinkInput.value);
   placesList.prepend(newPlace);
 };
 
 // SUBMIT PROFILE
-const formSubmitProfile = () => {
+const submitProfileForm = () => {
   const getName = nameInput.value;
   const getJob = jobInput.value;
   nameProfile.textContent = getName;
@@ -77,72 +74,64 @@ function handleLike(event) {
 }
 
 function handleDelete(event) {
-  const deletePlace = event.target.closest(".place");
-  deletePlace.remove();
+  event.target.closest(".place").remove();
 }
 
 function handleZoom(event) {
   zoomImage.src = event.target.src;
-  zoomCaption.innerText = event.target.alt;
-  popupOpen(popupZoom);
+  zoomCaption.textContent = event.target.alt;
+  openPopup(popupZoom);
 }
 
 function readProfileData() {
-  nameInput.setAttribute("value", nameProfile.textContent);
-  jobInput.setAttribute("value", jobProfile.textContent);
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
 }
 
 const editProfile = () => {
-  formProfile.reset();
   readProfileData();
-  resetErrorState(formProfile);
-  buttonSubmitProfile.classList.remove('popup__save-btn_inactive');
-  popupOpen(popupEditProfile);
+  buttonSubmitProfile.classList.remove("popup__save-btn_inactive");
+  openPopup(popupEditProfile);
 };
 
 const addPlace = () => {
-  formPlace.reset();
-  resetErrorState(formPlace);
-  popupOpen(popupAddPlace);
+  openPopup(popupAddPlace);
 };
 
 // Функция обнуления и скрытия errorMessage при открытии popup
 const resetErrorState = (form) => {
   const inputArea = form.querySelectorAll(".popup__input");
-  console.log(inputArea);
   inputArea.forEach((inputElement) => {
+    inputElement.value = "";
     inputElement.classList.remove("popup__input_invalid");
   });
-  const errorArea = form.querySelectorAll('.popup__input-error');
-  console.log(errorArea);
+  const errorArea = form.querySelectorAll(".popup__input-error");
   errorArea.forEach((errorElement) => {
     errorElement.classList.remove("popup__input-error_active");
   });
 };
 
 // функция открытия popup
-function popupOpen(popup) {
+function openPopup(popup) {
   popup.classList.add("popup_opened");
-  // Слушаем нажатие клавиши ESC
-  document.addEventListener("keydown", function (evt) {
-    if (evt.key === "Escape") {
-      popupClose(popup);
-    }
-  });
-  // Слушаем клик по overlay
-  popup.addEventListener("click", function (evt) {
-    if (
-      !evt.target.closest(".popup__container") &&
-      !evt.target.closest(".popup-zoom__container")
-    ) {
-      popupClose(popup);
-    }
-  });
+  // Добавляем слушатель на ESC
+  document.addEventListener("keydown", closePopupEsc);
 }
 
 // функция закрытия popup
-function popupClose(popup) {
+function closePopup(popup) {
   popup.classList.remove("popup_opened");
+  resetErrorState(popup);
+  // Убираем слушатель на ESC
+  document.removeEventListener("keydown", closePopupEsc);
+}
+
+// Функция закрытия popup по ESC
+function closePopupEsc(evt) {
+  if (evt.key === "Escape") {
+    const popupOpened = document.querySelector(".popup_opened");
+    closePopup(popupOpened);
+  }
 }
 
 // установка слушателей на кнопки close popup
@@ -150,7 +139,7 @@ function closeButtonListener() {
   document.querySelectorAll(".popup__close-btn").forEach((btn) => {
     btn.addEventListener("click", function (event) {
       const closeBtn = event.target.closest(".popup");
-      popupClose(closeBtn);
+      closePopup(closeBtn);
     });
   });
 }
@@ -160,16 +149,33 @@ closeButtonListener();
 buttonEditProfile.addEventListener("click", editProfile);
 buttonAddPlace.addEventListener("click", addPlace);
 
-formProfile.addEventListener("submit", function (event) {
-  event.preventDefault();
-  formSubmitProfile();
-  popupClose(popupEditProfile);
+formProfile.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  submitProfileForm();
+  closePopup(popupEditProfile);
 });
 
-formPlace.addEventListener("submit", function (event) {
-  event.preventDefault();
-  formSubmitNewPlace();
-  popupClose(popupAddPlace);
+formPlace.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+  submitNewPlaceForm();
+  closePopup(popupAddPlace);
 });
+
+const closePopupOverlay = () => {
+  const overlayList = document.querySelectorAll(".popup");
+  overlayList.forEach((overlayElement) => {
+    overlayElement.addEventListener("click", (evt) => {
+      if (
+        !evt.target.closest(".popup__container") &&
+        !evt.target.closest(".popup-zoom__container")
+      ) {
+        const popupOpened = document.querySelector(".popup_opened");
+        closePopup(popupOpened);
+      }
+    });
+  });
+};
+
+closePopupOverlay();
 
 render();
