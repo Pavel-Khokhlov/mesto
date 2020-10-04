@@ -14,13 +14,16 @@ const hideInputError = (formElement, inputElement, params) => {
   inputElement.classList.remove(params.inputInvalidClass);
 };
 
+// Функция проверки инпутов на ошибки
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
 // Функция изменения кнопки отправки
 const toggleButtonState = (inputList, buttonElement, params) => {
-  const hasInvalidInput = inputList.some(
-    (inputElement) => !inputElement.validity.valid
-  );
-
-  if (hasInvalidInput) {
+  if (hasInvalidInput(inputList)) {
     buttonElement.classList.add(params.inactiveButtonClass);
     buttonElement.setAttribute("disabled", true);
   } else {
@@ -30,9 +33,8 @@ const toggleButtonState = (inputList, buttonElement, params) => {
 };
 
 // Функция проверки ввода на ошибку
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, params) => {
   const isInputNotValid = !inputElement.validity.valid;
-
   if (isInputNotValid) {
     const errorMessage = inputElement.validationMessage;
     showInputError(formElement, inputElement, errorMessage, params);
@@ -43,18 +45,17 @@ const checkInputValidity = (formElement, inputElement) => {
 
 // Функция установки обработчиков события
 const setEventListeners = (formElement, params) => {
-  const inputList =
-  Array.from(formElement.querySelectorAll(params.inputSelector));
-  const buttonElement =
-  formElement.querySelector(params.submitButtonSelector);
-
+  const inputList = Array.from(
+    formElement.querySelectorAll(params.inputSelector)
+  );
+  const buttonElement = formElement.querySelector(params.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement, params);
   inputList.forEach((inputElement) => {
     inputElement.addEventListener("input", () => {
-      checkInputValidity(formElement, inputElement);
+      checkInputValidity(formElement, inputElement, params);
       toggleButtonState(inputList, buttonElement, params);
     });
   });
-  toggleButtonState(inputList, buttonElement, params);
 };
 
 // Функция проверки валидации всех форм

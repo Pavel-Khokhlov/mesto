@@ -90,7 +90,7 @@ function readProfileData() {
 
 const editProfile = () => {
   readProfileData();
-  buttonSubmitProfile.classList.remove("popup__save-btn_inactive");
+  //buttonSubmitProfile.classList.remove("popup__save-btn_inactive");
   openPopup(popupEditProfile);
 };
 
