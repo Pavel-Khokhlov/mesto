@@ -8,7 +8,6 @@ const buttonAddPlace = document.querySelector(".profile__add-btn");
 // POPUP PROFILE CONST
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const formProfile = popupEditProfile.querySelector(".popup__container");
-const buttonSubmitProfile = popupEditProfile.querySelector(".popup__save-btn");
 const nameProfile = document.querySelector(".profile__name");
 const jobProfile = document.querySelector(".profile__job");
 const nameInput = popupEditProfile.querySelector(".popup__input_name-profile");
@@ -90,7 +89,6 @@ function readProfileData() {
 
 const editProfile = () => {
   readProfileData();
-  //buttonSubmitProfile.classList.remove("popup__save-btn_inactive");
   openPopup(popupEditProfile);
 };
 
