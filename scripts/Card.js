@@ -1,9 +1,8 @@
 class Card {
-  constructor(name, link, selector, prependPlace) {
+  constructor(name, link, selector) {
     this._name = name;
     this._link = link;
     this._selector = selector;
-    this._prependPlace = prependPlace;
   }
 
   _getTemplate() {

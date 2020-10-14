@@ -1,6 +1,7 @@
-import { initialPlaces } from "./Data.js";
-import { params } from "./Params.js";
-import Card from "./Card.js";
+import { initialPlaces } from "./data.js";
+import { params } from "./params.js";
+import Card from "./card.js";
+import FormValidator from "./formValidator.js"
 
 const prependPlace = (element) => {
   params.placesList.prepend(element);
@@ -18,12 +19,14 @@ const openZoomPopup = (name, link) => {
 
 initialPlaces.forEach((item) => {
   // Создадим экземпляр карточки
-  const card = new Card(item.name, item.link, params.placeTemplate, prependPlace);
+  const card = new Card(item.name, item.link, params.placeTemplate);
   // Создаём карточку и возвращаем наружу
   const placeElement = card.getPlace();
   // Добавляем в DOM
   params.placesList.append(placeElement);
-  document.querySelector('.place__image').addEventListener('click', () => handleZoom);
+  document
+    .querySelector(".place__image")
+    .addEventListener("click", () => handleZoom);
 });
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -68,7 +71,7 @@ const handleZoom = (evt) => {
   zoomImage.src = evt.target.src;
   zoomCaption.textContent = evt.target.alt;
   openPopup(popupZoom);
-}
+};
 
 // Функция обнуления и скрытия errorMessage при открытии popup
 const resetErrorState = (form) => {
@@ -165,3 +168,9 @@ formPlace.addEventListener("submit", (evt) => {
 
 buttonEditProfile.addEventListener("click", editProfile);
 buttonAddPlace.addEventListener("click", addPlace);
+
+const formEditProfileValidator = new FormValidator(params.formEditProfile, params);
+formEditProfileValidator.enableValidation();
+
+const fromAddPlaceValidator = new FormValidator(params.formAddPlace, params);
+fromAddPlaceValidator.enableValidation();
