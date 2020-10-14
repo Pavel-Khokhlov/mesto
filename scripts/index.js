@@ -14,12 +14,11 @@ initialPlaces.forEach((item) => {
   const card = new Card(item.name, item.link, params.placeTemplate);
   // Создаём карточку и возвращаем наружу
   const placeElement = card.getPlace();
-  console.log(placeElement);
   placeElement
     .querySelector(".place__image")
     .addEventListener("click", (event) => handleZoom(event));
   // Добавляем в DOM
-  params.placesList.append(placeElement);
+  document.querySelector(".places").append(placeElement);
 });
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -140,8 +139,8 @@ const submitNewPlaceForm = () => {
   );
   const placeElement = card.getPlace();
   placeElement
-  .querySelector(".place__image")
-  .addEventListener("click", (event) => handleZoom(event));
+    .querySelector(".place__image")
+    .addEventListener("click", (event) => handleZoom(event));
   prependPlace(placeElement);
 };
 
