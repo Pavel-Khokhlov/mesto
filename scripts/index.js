@@ -139,8 +139,8 @@ const submitNewPlaceForm = () => {
   );
   const placeElement = card.getPlace();
   placeElement
-  .querySelector(".place__image")
-  .addEventListener("click", (event) => handleZoom(event));
+    .querySelector(".place__image")
+    .addEventListener("click", (event) => handleZoom(event));
   prependPlace(placeElement);
 };
 
