@@ -1,32 +1,25 @@
 import { initialPlaces } from "./data.js";
 import { params } from "./params.js";
 import Card from "./card.js";
-import FormValidator from "./formValidator.js"
+import FormValidator from "./formValidator.js";
 
+// Функция вывода нового места
 const prependPlace = (element) => {
   params.placesList.prepend(element);
 };
 
-/*
-const openZoomPopup = (name, link) => {
-  const zoomImage = document.querySelector(".popup-zoom__image");
-  const zoomCaption = document.querySelector(".popup-zoom__caption");
-  zoomImage.src = name;
-  zoomCaption.textContent = link;
-  openPopup(popupZoom);
-};
-*/
-
+// Функция вывода предустановленных мест из массива
 initialPlaces.forEach((item) => {
-  // Создадим экземпляр карточки
+  // Создадим макет карточки
   const card = new Card(item.name, item.link, params.placeTemplate);
   // Создаём карточку и возвращаем наружу
   const placeElement = card.getPlace();
+  console.log(placeElement);
+  placeElement
+    .querySelector(".place__image")
+    .addEventListener("click", (event) => handleZoom(event));
   // Добавляем в DOM
   params.placesList.append(placeElement);
-  document
-    .querySelector(".place__image")
-    .addEventListener("click", () => handleZoom);
 });
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -64,12 +57,13 @@ const openPopup = (popup) => {
   document.addEventListener("keydown", closePopupEsc);
 };
 
+const popupZoom = document.querySelector(".popup-zoom");
 const zoomImage = document.querySelector(".popup-zoom__image");
 const zoomCaption = document.querySelector(".popup-zoom__caption");
 
-const handleZoom = (evt) => {
-  zoomImage.src = evt.target.src;
-  zoomCaption.textContent = evt.target.alt;
+const handleZoom = (event) => {
+  zoomImage.src = event.target.src;
+  zoomCaption.textContent = event.target.alt;
   openPopup(popupZoom);
 };
 
@@ -103,7 +97,7 @@ const closePopupEsc = (evt) => {
   }
 };
 
-// установка слушателей на кнопки close popup
+// Установка слушателей на кнопки close popup
 const closeButtonListener = () => {
   document.querySelectorAll(".popup__close-btn").forEach((btn) => {
     btn.addEventListener("click", function (event) {
@@ -113,11 +107,13 @@ const closeButtonListener = () => {
   });
 };
 
+// Функция закрытия popup по overlay
 const closePopupOverlay = () => {
   const overlayList = document.querySelectorAll(params.popup);
   overlayList.forEach((overlayElement) => {
     overlayElement.addEventListener("click", (evt) => {
       if (
+        // Проверка нажатия, если это не контейнер popup
         !evt.target.closest(".popup__container") &&
         !evt.target.closest(".popup-zoom__container")
       ) {
@@ -143,6 +139,9 @@ const submitNewPlaceForm = () => {
     prependPlace
   );
   const placeElement = card.getPlace();
+  placeElement
+  .querySelector(".place__image")
+  .addEventListener("click", (event) => handleZoom(event));
   prependPlace(placeElement);
 };
 
@@ -169,7 +168,10 @@ formPlace.addEventListener("submit", (evt) => {
 buttonEditProfile.addEventListener("click", editProfile);
 buttonAddPlace.addEventListener("click", addPlace);
 
-const formEditProfileValidator = new FormValidator(params.formEditProfile, params);
+const formEditProfileValidator = new FormValidator(
+  params.formEditProfile,
+  params
+);
 formEditProfileValidator.enableValidation();
 
 const fromAddPlaceValidator = new FormValidator(params.formAddPlace, params);
