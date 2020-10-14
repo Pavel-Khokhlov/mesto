@@ -14,7 +14,6 @@ initialPlaces.forEach((item) => {
   const card = new Card(item.name, item.link, params.placeTemplate);
   // Создаём карточку и возвращаем наружу
   const placeElement = card.getPlace();
-  console.log(placeElement);
   placeElement
     .querySelector(".place__image")
     .addEventListener("click", (event) => handleZoom(event));
