@@ -56,23 +56,27 @@
     <form class="popup__container" method="post" novalidate>
       <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
-      <input type="text" id="fullName" class="popup__input popup__input_name-profile" placeholder="Имя Фамилия" autocomplete="off" minlength="2" maxlength="40" value="" required>
+      <input type="text" id="fullName" class="popup__input popup__input_name-profile" placeholder="Имя Фамилия"
+        autocomplete="off" minlength="2" maxlength="40" value="" required>
       <span id="fullName-error" class="popup__input-error"></span>
-      <input type="text" id="jobPosition" class="popup__input popup__input_job-profile" placeholder="Профессия или должность" autocomplete="off" minlength="2" maxlength="200" value="" required>
+      <input type="text" id="jobPosition" class="popup__input popup__input_job-profile"
+        placeholder="Профессия или должность" autocomplete="off" minlength="2" maxlength="200" value="" required>
       <span id="jobPosition-error" class="popup__input-error"></span>
       <button type="submit" class="popup__save-btn" aria-label="Сохранить новый профиль">Сохранить</button>
     </form>
   </section>
 
-<!-- POPUP ADD PLACE -->
+  <!-- POPUP ADD PLACE -->
 
   <section class="popup popup_add-place">
     <form class="popup__container" method="post">
       <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
       <h2 class="popup__title">Новое место</h2>
-      <input type="text" id="placeName" class="popup__input popup__input_name-place" placeholder="Название" autocomplete="off" minlength="2" maxlength="30" required>
+      <input type="text" id="placeName" class="popup__input popup__input_name-place" placeholder="Название"
+        autocomplete="off" minlength="2" maxlength="30" required>
       <span id="placeName-error" class="popup__input-error"></span>
-      <input type="url" id="placeLink" class="popup__input popup__input_link-place" placeholder="Ссылка на картинку" autocomplete="off" required>
+      <input type="url" id="placeLink" class="popup__input popup__input_link-place" placeholder="Ссылка на картинку"
+        autocomplete="off" required>
       <span id="placeLink-error" class="popup__input-error"></span>
       <button type="submit" class="popup__save-btn" aria-label="Добавить новое место">Создать</button>
     </form>
@@ -81,19 +85,21 @@
   <!-- POPUP ZOOM PHOTO -->
 
   <section class="popup popup-zoom">
-      <figure class="popup-zoom__container">
-        <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
-        <img src="#" alt="name" class="popup-zoom__image">
-        <figcaption class="popup-zoom__caption">name</figcaption>
-      </figure>
+    <figure class="popup-zoom__container">
+      <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
+      <img src="#" alt="name" class="popup-zoom__image">
+      <figcaption class="popup-zoom__caption">name</figcaption>
+    </figure>
   </section>
 
-   <!-- PLACE TEMPLATE -->
+  <!-- PLACE TEMPLATE -->
 
-   <template class="place-template">
+  <template class="place-template">
     <li class="place">
       <button type="button" class="button place__del-btn" aria-label="удалить место"></button>
-      <img src="link" alt="alt" class="place__image">
+      <button type="button" class="button">
+        <img src="link" alt="alt" class="place__image">
+      </button>
       <div class="place__info">
         <h2 class="place__title">name</h2>
         <button type="button" class="button place__like-btn" aria-label="поставить лайк"></button>

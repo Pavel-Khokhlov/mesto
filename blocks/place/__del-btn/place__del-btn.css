@@ -5,4 +5,5 @@
   width: 18px;
   height: 19.3px;
   background-image: url(../../../images/trash.svg);
+  z-index: 2;
 }

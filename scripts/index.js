@@ -8,17 +8,47 @@ const prependPlace = (element) => {
   params.placesList.prepend(element);
 };
 
-// Функция вывода предустановленных мест из массива
-initialPlaces.forEach((item) => {
-  // Создадим макет карточки
-  const card = new Card(item.name, item.link, params.placeTemplate);
+//
+const handleZoom = (e) => {
+  params.zoomImage.src = e.target.src;
+  params.zoomCaption.textContent = e.target.alt;
+  openPopup(params.popupZoom);
+};
+
+// Функция Like
+const handleLike = (e) => {
+  e.target.classList.toggle("place__like-btn_active");
+};
+
+// Функция удаления карточки
+const handleDelete = (e) => {
+  e.target.closest(".place").remove();
+};
+
+// Функция создания новой карточки
+function getNewPlace(name, link, selector) {
+  const card = new Card(name, link, selector);
   // Создаём карточку и возвращаем наружу
-  const placeElement = card.getPlace();
+  const placeElement = card.generatePlace();
+  // Установка слушателей при создании карточки
   placeElement
     .querySelector(".place__image")
-    .addEventListener("click", (event) => handleZoom(event));
-  // Добавляем в DOM
-  params.placesList.append(placeElement);
+    .addEventListener("click", handleZoom);
+  placeElement
+    .querySelector(".place__like-btn")
+    .addEventListener("click", handleLike);
+  placeElement
+    .querySelector(".place__del-btn")
+    .addEventListener("click", handleDelete);
+  return placeElement;
+}
+
+// Функция вывода предустановленных мест из массива
+initialPlaces.forEach((item) => {
+  const name = item.name;
+  const link = item.link;
+  const selector = params.placeTemplate;
+  params.placesList.append(getNewPlace(name, link, selector));
 });
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
@@ -34,20 +64,6 @@ const jobProfile = document.querySelector(".profile__job");
 const nameInput = popupEditProfile.querySelector(".popup__input_name-profile");
 const jobInput = popupEditProfile.querySelector(".popup__input_job-profile");
 
-const readProfileData = () => {
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
-};
-
-const editProfile = () => {
-  readProfileData();
-  openPopup(popupEditProfile);
-};
-
-const addPlace = () => {
-  openPopup(popupAddPlace);
-};
-
 // функция открытия popup
 const openPopup = (popup) => {
   popup.classList.add("popup_opened");
@@ -56,30 +72,7 @@ const openPopup = (popup) => {
   document.addEventListener("keydown", closePopupEsc);
 };
 
-const popupZoom = document.querySelector(".popup-zoom");
-const zoomImage = document.querySelector(".popup-zoom__image");
-const zoomCaption = document.querySelector(".popup-zoom__caption");
-
-const handleZoom = (event) => {
-  zoomImage.src = event.target.src;
-  zoomCaption.textContent = event.target.alt;
-  openPopup(popupZoom);
-};
-
-// Функция обнуления и скрытия errorMessage при открытии popup
-const resetErrorState = (form) => {
-  const inputArea = form.querySelectorAll(".popup__input");
-  inputArea.forEach((inputElement) => {
-    inputElement.value = "";
-    inputElement.classList.remove("popup__input_invalid");
-  });
-  const errorArea = form.querySelectorAll(".popup__input-error");
-  errorArea.forEach((errorElement) => {
-    errorElement.classList.remove("popup__input-error_active");
-  });
-};
-
-// функция закрытия popup
+// Функция закрытия popup
 const closePopup = (popup) => {
   popup.classList.remove("popup_opened");
   resetErrorState(popup);
@@ -96,8 +89,36 @@ const closePopupEsc = (evt) => {
   }
 };
 
+// Функция обновления данных профайла
+const updateProfileData = () => {
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
+};
+
+const editProfile = () => {
+  updateProfileData();
+  openPopup(popupEditProfile);
+};
+
+const addPlace = () => {
+  openPopup(popupAddPlace);
+};
+
+// Функция обнуления и скрытия errorMessage при открытии popup
+const resetErrorState = (form) => {
+  const inputArea = form.querySelectorAll(".popup__input");
+  inputArea.forEach((inputElement) => {
+    inputElement.value = "";
+    inputElement.classList.remove(params.inputInvalidClass);
+  });
+  const errorArea = form.querySelectorAll(".popup__input-error");
+  errorArea.forEach((errorElement) => {
+    errorElement.classList.remove(params.activeErrorClass);
+  });
+};
+
 // Установка слушателей на кнопки close popup
-const closeButtonListener = () => {
+const setCloseButtonListener = () => {
   document.querySelectorAll(".popup__close-btn").forEach((btn) => {
     btn.addEventListener("click", function (event) {
       const closeBtn = event.target.closest(params.popup);
@@ -106,50 +127,36 @@ const closeButtonListener = () => {
   });
 };
 
-// Функция закрытия popup по overlay
-const closePopupOverlay = () => {
+// Установка слушателя закрытия popup по overlay
+const setOverlayListener = () => {
   const overlayList = document.querySelectorAll(params.popup);
   overlayList.forEach((overlayElement) => {
     overlayElement.addEventListener("click", (evt) => {
-      if (
-        // Проверка нажатия, если это не контейнер popup
-        !evt.target.closest(".popup__container") &&
-        !evt.target.closest(".popup-zoom__container")
-      ) {
-        const popupOpened = document.querySelector(".popup_opened");
+      if (evt.target === overlayElement) {
+        const popupOpened = evt.target;
         closePopup(popupOpened);
       }
     });
   });
 };
 
-closePopupOverlay();
-closeButtonListener();
-
-const placeNameInput = document.querySelector(".popup__input_name-place");
-const placeLinkInput = document.querySelector(".popup__input_link-place");
+setOverlayListener();
+setCloseButtonListener();
 
 // SUBMIT NEW PLACE
 const submitNewPlaceForm = () => {
-  const card = new Card(
-    placeNameInput.value,
-    placeLinkInput.value,
-    params.placeTemplate,
-    prependPlace
-  );
-  const placeElement = card.getPlace();
-  placeElement
-    .querySelector(".place__image")
-    .addEventListener("click", (event) => handleZoom(event));
-  prependPlace(placeElement);
+  const name = params.placeNameInput.value;
+  const link = params.placeLinkInput.value;
+  const selector = params.placeTemplate;
+  prependPlace(getNewPlace(name, link, selector));
 };
 
 // SUBMIT PROFILE
 const submitProfileForm = () => {
-  const getName = nameInput.value;
-  const getJob = jobInput.value;
-  nameProfile.textContent = getName;
-  jobProfile.textContent = getJob;
+  const nameValue = nameInput.value;
+  const jobValue = jobInput.value;
+  nameProfile.textContent = nameValue;
+  jobProfile.textContent = jobValue;
 };
 
 formProfile.addEventListener("submit", (evt) => {

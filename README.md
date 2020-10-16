@@ -1,3 +1,13 @@
+# Работа над ошибками
+* изменены имена getName и getJob на nameValue и jobValue
+* изменил названия функций closeButtonListener и closePopupOverlay на setCloseButtonListener и setOverlayListener
+* изменил название функции eadProfileData на updateProfileData
+* исправил const popupOpened = evt.target;
+* сделал переменную - const thisImage = this._element.querySelector(".place__image");
+* создал в card.js this._likeButton & this._delButton
+* завернул place__image в button
+* выделил в отдельную функцию создание new Card
+
 # Проект 7: Место (Гараж Ferrari) REFACTORING
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)
@@ -11,11 +21,11 @@
 ### Технологии
 В проекте были использовы HTML CSS, применены технологии адаптивной и резиновой верстки. Так же использован JavaScript для работы с Popup. Использоаны функции работы с массивом, функции добавление удаления элементов страницы. Добавлены функции проверки форм.
 Создана папка SCRIPTS, в ней 5 файла
-data.js - массив первых шести мест
-params.js - база переменных
-card.js - class Card
-formValidator.js - class FormValidator
-index.js - все остальное
+* data.js - массив первых шести мест
+* params.js - база переменных
+* card.js - class Card
+* formValidator.js - class FormValidator
+* index.js - все остальное
 
 Работает на большешстве устройств.
 **Основные точки проверки при размерах экрана**
