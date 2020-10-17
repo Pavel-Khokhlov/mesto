@@ -3,6 +3,10 @@ import { params } from "./params.js";
 import Card from "./card.js";
 import FormValidator from "./formValidator.js";
 
+let openPopup;
+let closePopupEsc;
+let resetErrorState;
+
 // Функция вывода нового места
 const prependPlace = (element) => {
   params.placesList.prepend(element);
@@ -15,16 +19,6 @@ const handleZoom = (e) => {
   openPopup(params.popupZoom);
 };
 
-// Функция Like
-const handleLike = (e) => {
-  e.target.classList.toggle("place__like-btn_active");
-};
-
-// Функция удаления карточки
-const handleDelete = (e) => {
-  e.target.closest(".place").remove();
-};
-
 // Функция создания новой карточки
 function getNewPlace(name, link, selector) {
   const card = new Card(name, link, selector);
@@ -34,12 +28,6 @@ function getNewPlace(name, link, selector) {
   placeElement
     .querySelector(".place__image")
     .addEventListener("click", handleZoom);
-  placeElement
-    .querySelector(".place__like-btn")
-    .addEventListener("click", handleLike);
-  placeElement
-    .querySelector(".place__del-btn")
-    .addEventListener("click", handleDelete);
   return placeElement;
 }
 
@@ -65,7 +53,7 @@ const nameInput = popupEditProfile.querySelector(".popup__input_name-profile");
 const jobInput = popupEditProfile.querySelector(".popup__input_job-profile");
 
 // функция открытия popup
-const openPopup = (popup) => {
+openPopup = (popup) => {
   popup.classList.add("popup_opened");
   document.body.style.overflow = "hidden";
   // Добавляем слушатель на ESC
@@ -82,7 +70,7 @@ const closePopup = (popup) => {
 };
 
 // Функция закрытия popup по ESC
-const closePopupEsc = (evt) => {
+closePopupEsc = (evt) => {
   if (evt.key === "Escape") {
     const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
@@ -105,7 +93,7 @@ const addPlace = () => {
 };
 
 // Функция обнуления и скрытия errorMessage при открытии popup
-const resetErrorState = (form) => {
+resetErrorState = (form) => {
   const inputArea = form.querySelectorAll(".popup__input");
   inputArea.forEach((inputElement) => {
     inputElement.value = "";

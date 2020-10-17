@@ -16,6 +16,20 @@ class Card {
     return placeElement;
   }
 
+  _handleLike(e) {
+    e.target.classList.toggle("place__like-btn_active");
+  }
+
+  _handleDelete(e) {
+    e.target.closest(".place").remove();
+  }
+
+  _setEventsListeners() {
+    this._element.querySelector(".place__like-btn").addEventListener("click", this._handleLike);
+    this._element.querySelector(".place__del-btn")
+    .addEventListener("click", this._handleDelete);
+  }
+
   generatePlace() {
     this._element = this._getTemplate();
     const thisImage = this._element.querySelector(".place__image");
@@ -24,6 +38,7 @@ class Card {
     thisImage.src = this._link;
     thisImage.alt = this._name;
     this._element.querySelector(".place__title").textContent = this._name;
+    this._setEventsListeners();
     return this._element;
   }
 }

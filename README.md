@@ -1,4 +1,11 @@
-# Работа над ошибками
+# Работа над ошибками №2
+* вернул функции like & del обратно в Card
+* обьявил переменные
+let openPopup;
+let closePopupEsc;
+let resetErrorState;
+
+# Работа над ошибками №1
 * изменены имена getName и getJob на nameValue и jobValue
 * изменил названия функций closeButtonListener и closePopupOverlay на setCloseButtonListener и setOverlayListener
 * изменил название функции eadProfileData на updateProfileData
