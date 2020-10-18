@@ -25,9 +25,8 @@ class Card {
   }
 
   _setEventsListeners() {
-    this._element.querySelector(".place__like-btn").addEventListener("click", this._handleLike);
-    this._element.querySelector(".place__del-btn")
-    .addEventListener("click", this._handleDelete);
+    this._likeButton.addEventListener("click", this._handleLike);
+    this._delButton.addEventListener("click", this._handleDelete);
   }
 
   generatePlace() {
