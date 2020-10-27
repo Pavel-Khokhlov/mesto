@@ -2,6 +2,9 @@ import { initialPlaces } from "./data.js";
 import { params } from "./params.js";
 import Card from "./card.js";
 import FormValidator from "./formValidator.js";
+//
+import Section from "../../components/section.js";
+//
 
 let openPopup;
 let closePopupEsc;
@@ -12,7 +15,7 @@ const prependPlace = (element) => {
   params.placesList.prepend(element);
 };
 
-//
+/*
 const handleZoom = (e) => {
   params.zoomImage.src = e.target.src;
   params.zoomCaption.textContent = e.target.alt;
@@ -38,6 +41,22 @@ initialPlaces.forEach((item) => {
   const selector = params.placeTemplate;
   params.placesList.append(getNewPlace(name, link, selector));
 });
+*/
+
+const defaultPlaceList = new Section(
+  {
+    items: initialPlaces,
+    renderer: (item) => {
+      const card = new Card(item.name, item.link, params.placeTemplate);
+
+      const placeElement = card.generatePlace();
+      defaultPlaceList.addItem(placeElement);
+    },
+  },
+  params.placesList
+);
+
+defaultPlaceList.renderPlaces();
 
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const buttonEditProfile = document.querySelector(".profile__edit-btn");

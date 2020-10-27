@@ -9,7 +9,7 @@ class Card {
 
   _getTemplate() {
     const placeElement = document
-      .querySelector(".place-template")
+      .querySelector(this._selector)
       .content.querySelector(".place")
       .cloneNode(true);
 
