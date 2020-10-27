@@ -1,24 +1,6 @@
-# Работа над ошибками №2
-* пропусти этот момент (исправил файл card.js)
+# Проект 8: Место (Гараж Ferrari) REFACTORING
 
-
-* вернул функции like & del обратно в Card
-* обьявил переменные
-let openPopup;
-let closePopupEsc;
-let resetErrorState;
-
-# Работа над ошибками №1
-* изменены имена getName и getJob на nameValue и jobValue
-* изменил названия функций closeButtonListener и closePopupOverlay на setCloseButtonListener и setOverlayListener
-* изменил название функции eadProfileData на updateProfileData
-* исправил const popupOpened = evt.target;
-* сделал переменную - const thisImage = this._element.querySelector(".place__image");
-* создал в card.js this._likeButton & this._delButton
-* завернул place__image в button
-* выделил в отдельную функцию создание new Card
-
-# Проект 7: Место (Гараж Ferrari) REFACTORING
+* created class Section
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)
 
