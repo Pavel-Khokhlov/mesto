@@ -1,20 +1,25 @@
-import { initialPlaces } from "./data.js";
-import { params } from "./params.js";
-import Card from "./card.js";
-import FormValidator from "./formValidator.js";
-//
-import Section from "../../components/section.js";
-//
+import { initialPlaces } from "../utils/data.js";
+import { constants, selectors } from "../utils/constants.js";
+import Card from "../components/card.js";
+import Section from "../components/section.js";
+import Popup from "../components/popup.js";
+//import PopupWithImage from "../../components/popupWithImage.js";
+import UserInfo from "../../components/userInfo.js";
+//import PopupWithForm from "../components/popupWithForm.js";
+//import FormValidator from "../components/formValidator.js";
 
-let openPopup;
-let closePopupEsc;
-let resetErrorState;
+//let openPopup;
+//let closePopupEsc;
+//let resetErrorState;
 
-// Функция вывода нового места
+/* Функция вывода нового места
 const prependPlace = (element) => {
   params.placesList.prepend(element);
 };
 
+const zoomImagePopup = new PopupWithImage(params.popupZoom);
+zoomImagePopup.setEventListeners();
+*/
 /*
 const handleZoom = (e) => {
   params.zoomImage.src = e.target.src;
@@ -47,31 +52,26 @@ const defaultPlaceList = new Section(
   {
     items: initialPlaces,
     renderer: (item) => {
-      const card = new Card(item.name, item.link, params.placeTemplate);
+      const card = new Card(item.name, item.link, constants.placeTemplate);
 
       const placeElement = card.generatePlace();
       defaultPlaceList.addItem(placeElement);
     },
   },
-  params.placesList
+  constants.placesList
 );
 
 defaultPlaceList.renderPlaces();
 
+//const buttonEditProfile = document.querySelector(".profile__edit-btn");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
-const buttonEditProfile = document.querySelector(".profile__edit-btn");
 const formProfile = popupEditProfile.querySelector(".popup__container");
+//const popupAddPlace = document.querySelector(".popup_add-place");
+//const buttonAddPlace = document.querySelector(".profile__add-btn");
+//const formPlace = popupAddPlace.querySelector(".popup__container");
 
-const popupAddPlace = document.querySelector(".popup_add-place");
-const buttonAddPlace = document.querySelector(".profile__add-btn");
-const formPlace = popupAddPlace.querySelector(".popup__container");
 
-const nameProfile = document.querySelector(".profile__name");
-const jobProfile = document.querySelector(".profile__job");
-const nameInput = popupEditProfile.querySelector(".popup__input_name-profile");
-const jobInput = popupEditProfile.querySelector(".popup__input_job-profile");
-
-// функция открытия popup
+/* функция открытия popup
 openPopup = (popup) => {
   popup.classList.add("popup_opened");
   document.body.style.overflow = "hidden";
@@ -94,24 +94,14 @@ closePopupEsc = (evt) => {
     const popupOpened = document.querySelector(".popup_opened");
     closePopup(popupOpened);
   }
-};
+};*/
 
-// Функция обновления данных профайла
-const updateProfileData = () => {
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
-};
-
-const editProfile = () => {
-  updateProfileData();
-  openPopup(popupEditProfile);
-};
-
+/*
 const addPlace = () => {
   openPopup(popupAddPlace);
-};
+};*/
 
-// Функция обнуления и скрытия errorMessage при открытии popup
+/* Функция обнуления и скрытия errorMessage при открытии popup
 resetErrorState = (form) => {
   const inputArea = form.querySelectorAll(".popup__input");
   inputArea.forEach((inputElement) => {
@@ -123,8 +113,9 @@ resetErrorState = (form) => {
     errorElement.classList.remove(params.activeErrorClass);
   });
 };
+*/
 
-// Установка слушателей на кнопки close popup
+/* Установка слушателей на кнопки close popup
 const setCloseButtonListener = () => {
   document.querySelectorAll(".popup__close-btn").forEach((btn) => {
     btn.addEventListener("click", function (event) {
@@ -133,8 +124,8 @@ const setCloseButtonListener = () => {
     });
   });
 };
-
-// Установка слушателя закрытия popup по overlay
+*/
+/* Установка слушателя закрытия popup по overlay
 const setOverlayListener = () => {
   const overlayList = document.querySelectorAll(params.popup);
   overlayList.forEach((overlayElement) => {
@@ -149,38 +140,46 @@ const setOverlayListener = () => {
 
 setOverlayListener();
 setCloseButtonListener();
-
-// SUBMIT NEW PLACE
+*/
+/* SUBMIT NEW PLACE
 const submitNewPlaceForm = () => {
   const name = params.placeNameInput.value;
   const link = params.placeLinkInput.value;
   const selector = params.placeTemplate;
   prependPlace(getNewPlace(name, link, selector));
 };
+*/
+
+// Функция обновления данных профайла
+//const updateProfileData = () => {
+//  nameInput.value = nameProfile.textContent;
+//  jobInput.value = jobProfile.textContent;
+//};
+
+//const editProfile = () => {
+//  userProfile.getUserInfo();
+//  Popup.open(params.formEditProfile);
+//};
 
 // SUBMIT PROFILE
-const submitProfileForm = () => {
-  const nameValue = nameInput.value;
-  const jobValue = jobInput.value;
-  nameProfile.textContent = nameValue;
-  jobProfile.textContent = jobValue;
-};
+//const submitProfileForm = () => {
+//  const nameValue = nameInput.value;
+//  const jobValue = jobInput.value;
+//  nameProfile.textContent = nameValue;
+//  jobProfile.textContent = jobValue;
+//};
 
-formProfile.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  submitProfileForm();
-  closePopup(popupEditProfile);
-});
 
+/*
 formPlace.addEventListener("submit", (evt) => {
   evt.preventDefault();
   submitNewPlaceForm();
   closePopup(popupAddPlace);
 });
-
-buttonEditProfile.addEventListener("click", editProfile);
-buttonAddPlace.addEventListener("click", addPlace);
-
+*/
+//buttonEditProfile.addEventListener("click", editProfile);
+//buttonAddPlace.addEventListener("click", addPlace);
+/*
 const formEditProfileValidator = new FormValidator(
   params.formEditProfile,
   params
@@ -189,3 +188,44 @@ formEditProfileValidator.enableValidation();
 
 const fromAddPlaceValidator = new FormValidator(params.formAddPlace, params);
 fromAddPlaceValidator.enableValidation();
+*/
+
+//const buttonEditProfile = new UserInfo();
+/*buttonEditProfile.setEventListeners();
+
+const buttonAddPlace = new PopupWithForm({
+  popupSelector: params.formAddPlace,
+  submitPlaceForm: (item) => {
+    const name = params.placeNameInput.value;
+    const link = params.placeLinkInput.value;
+    const selector = params.placeTemplate;
+      const card = new Card(name, link, selector);
+      const placeElement = card.generatePlace();
+      cardsList.setItem(placeElement);
+      PopupWithForm.close()
+  }
+});
+buttonAddPlace.setEventListeners();
+
+//const buttonZoomImage = new PopupWithImage();
+//buttonZoomImage.addEventListeners();
+*/
+
+const userProfile = new UserInfo({
+  nameUser: constants.nameProfile,
+  infoUser: constants.jobProfile,
+});
+
+const newPopup = new Popup(selectors.formEditProfile);
+newPopup.setEventListeners();
+
+formProfile.addEventListener("submit", (e) => {
+  e.preventDefault();
+  userProfile.setUserInfo();
+  newPopup.close();
+});
+
+constants.buttonEditProfile.addEventListener("click", () => {
+  userProfile.getUserInfo();
+  newPopup.open();
+});

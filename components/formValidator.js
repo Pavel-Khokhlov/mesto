@@ -12,7 +12,9 @@ class FormValidator {
 
   // Функция показать ошибку ввода
   _showInputError(inputElement, errorMessage) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._activeErrorClass);
     inputElement.classList.add(this._inputInvalidClass);
@@ -20,7 +22,9 @@ class FormValidator {
 
   // Функция скрыть ошибку ввода
   _hideInputError(inputElement) {
-    const errorElement = this._formElement.querySelector(`#${inputElement.id}-error`);
+    const errorElement = this._formElement.querySelector(
+      `#${inputElement.id}-error`
+    );
     errorElement.textContent = "";
     errorElement.classList.remove(this._activeErrorClass);
     inputElement.classList.remove(this._inputInvalidClass);
