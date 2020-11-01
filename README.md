@@ -2,6 +2,7 @@
 
 * created class Section
 * created class Popup, UserInfo
+* created class PopupWithImage
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)
 
