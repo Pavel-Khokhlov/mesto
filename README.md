@@ -1,6 +1,7 @@
 # Проект 8: Место (Гараж Ferrari) REFACTORING
 
 * created class Section
+* created class Popup, UserInfo
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)
 
