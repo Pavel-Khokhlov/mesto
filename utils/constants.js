@@ -2,7 +2,6 @@ export const constants = {
   popup: ".popup",
   placeTemplate: ".place-template",
   placesList: document.querySelector(".places"),
-  popupZoom: document.querySelector(".popup-zoom"),
   zoomImage: document.querySelector(".popup-zoom__image"),
   zoomCaption: document.querySelector(".popup-zoom__caption"),
   placeNameInput: document.querySelector(".popup__input_name-place"),
@@ -16,9 +15,11 @@ export const constants = {
   jobProfile: document.querySelector(".profile__job"),
   nameInput: document.querySelector(".popup__input_name-profile"),
   jobInput: document.querySelector(".popup__input_job-profile"),
+  buttonAddPlace: document.querySelector(".profile__add-btn"),
 };
 
 export const selectors = {
+  popupZoom: ".popup-zoom",
   formEditProfile: ".popup_edit-profile",
   formAddPlace: ".popup_add-place",
   formSelector: ".popup__container",

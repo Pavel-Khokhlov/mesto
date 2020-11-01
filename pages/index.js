@@ -5,6 +5,7 @@ import Section from "../components/section.js";
 import Popup from "../components/popup.js";
 //import PopupWithImage from "../../components/popupWithImage.js";
 import UserInfo from "../../components/userInfo.js";
+import PopupWithImage from "../components/popupWithImage.js";
 //import PopupWithForm from "../components/popupWithForm.js";
 //import FormValidator from "../components/formValidator.js";
 
@@ -47,14 +48,22 @@ initialPlaces.forEach((item) => {
   params.placesList.append(getNewPlace(name, link, selector));
 });
 */
+const handleZoom = (e) => {
+  constants.zoomImage.src = e.target.src;
+  constants.zoomCaption.textContent = e.target.alt;
+  popupWithImage.open();
+};
 
 const defaultPlaceList = new Section(
   {
     items: initialPlaces,
     renderer: (item) => {
       const card = new Card(item.name, item.link, constants.placeTemplate);
-
+      console.log(card);
       const placeElement = card.generatePlace();
+      placeElement
+      .querySelector(".place__image")
+      .addEventListener("click", handleZoom);
       defaultPlaceList.addItem(placeElement);
     },
   },
@@ -63,12 +72,10 @@ const defaultPlaceList = new Section(
 
 defaultPlaceList.renderPlaces();
 
-//const buttonEditProfile = document.querySelector(".profile__edit-btn");
 const popupEditProfile = document.querySelector(".popup_edit-profile");
 const formProfile = popupEditProfile.querySelector(".popup__container");
-//const popupAddPlace = document.querySelector(".popup_add-place");
-//const buttonAddPlace = document.querySelector(".profile__add-btn");
-//const formPlace = popupAddPlace.querySelector(".popup__container");
+const popupAddPlace = document.querySelector(".popup_add-place");
+const formPlace = popupAddPlace.querySelector(".popup__container");
 
 
 /* функция открытия popup
@@ -211,21 +218,24 @@ buttonAddPlace.setEventListeners();
 //buttonZoomImage.addEventListeners();
 */
 
-const userProfile = new UserInfo({
+const userInfo = new UserInfo({
   nameUser: constants.nameProfile,
   infoUser: constants.jobProfile,
 });
 
-const newPopup = new Popup(selectors.formEditProfile);
-newPopup.setEventListeners();
+const popup = new Popup(selectors.formEditProfile);
+popup.setEventListeners();
+
+const popupWithImage = new PopupWithImage(selectors.popupZoom);
+popupWithImage.setEventListeners();
 
 formProfile.addEventListener("submit", (e) => {
   e.preventDefault();
-  userProfile.setUserInfo();
-  newPopup.close();
+  userInfo.setUserInfo();
+  popup.close();
 });
 
 constants.buttonEditProfile.addEventListener("click", () => {
-  userProfile.getUserInfo();
-  newPopup.open();
+  userInfo.getUserInfo();
+  popup.open();
 });

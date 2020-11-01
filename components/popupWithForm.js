@@ -11,9 +11,9 @@ export default class PopupWithForm extends Popup {
     this._inputList = this.popupSelector.document.querySelectorAll(
       ".popup__input"
     );
-    this._inputValues = "";
+    this._inputValues = {};
     this._inputList.forEach((item) => {
-      this._inputValues(item.name) = item.value;
+      this._inputValues[item.name] = item.value;
     });
     console.log(this._inputValues);
     return this._inputValues;
@@ -28,6 +28,6 @@ export default class PopupWithForm extends Popup {
   }
 
   closePopupAddPlace() {
-    super.closePopup();
+    super.close();
   }
 }
