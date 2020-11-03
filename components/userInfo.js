@@ -1,11 +1,11 @@
-import { constants } from "../utils/constants.js";
+import { nameInput, jobInput } from "../utils/constants.js";
 
 export default class UserInfo {
   constructor({ nameUser, infoUser }) {
     this._name = nameUser;
     this._info = infoUser;
-    this._nameInput = constants.nameInput;
-    this._jobInput = constants.jobInput;
+    this._nameInput = nameInput;
+    this._jobInput = jobInput;
   }
 
   getUserInfo() {

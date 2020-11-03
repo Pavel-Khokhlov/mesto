@@ -1,27 +1,42 @@
 import { initialPlaces } from "../utils/data.js";
-import { constants, selectors } from "../utils/constants.js";
+import {
+  popupForm,
+  placeTemplateSelector,
+  placesListSelector,
+  nameProfile,
+  jobProfile,
+  popupZoomSelector,
+  popupProfileSelector,
+  popupPlaceSelector,
+  formSelector,
+  popupInput,
+  submitButtonSelector,
+  buttonEditProfile,
+  buttonAddPlace,
+  inputNamePlace,
+  inputLinkPlace,
+} from "../utils/constants.js";
 import Card from "../components/card.js";
 import Section from "../components/section.js";
 import Popup from "../components/popup.js";
-//import PopupWithImage from "../../components/popupWithImage.js";
 import UserInfo from "../../components/userInfo.js";
 import PopupWithImage from "../components/popupWithImage.js";
-//import PopupWithForm from "../components/popupWithForm.js";
+import PopupWithForm from "../components/popupWithForm.js";
 //import FormValidator from "../components/formValidator.js";
 
 //let openPopup;
 //let closePopupEsc;
 //let resetErrorState;
 
-/* Функция вывода нового места
-const prependPlace = (element) => {
-  params.placesList.prepend(element);
-};
-
+// Функция вывода нового места
+//const prependPlace = (element) => {
+//  selectors.placesList.prepend(element);
+//};
+/*
 const zoomImagePopup = new PopupWithImage(params.popupZoom);
 zoomImagePopup.setEventListeners();
-*/
-/*
+
+
 const handleZoom = (e) => {
   params.zoomImage.src = e.target.src;
   params.zoomCaption.textContent = e.target.alt;
@@ -33,75 +48,35 @@ function getNewPlace(name, link, selector) {
   const card = new Card(name, link, selector);
   // Создаём карточку и возвращаем наружу
   const placeElement = card.generatePlace();
-  // Установка слушателей при создании карточки
-  placeElement
-    .querySelector(".place__image")
-    .addEventListener("click", handleZoom);
   return placeElement;
 }
 
-// Функция вывода предустановленных мест из массива
-initialPlaces.forEach((item) => {
-  const name = item.name;
-  const link = item.link;
-  const selector = params.placeTemplate;
-  params.placesList.append(getNewPlace(name, link, selector));
-});
 */
-const handleZoom = (e) => {
-  constants.zoomImage.src = e.target.src;
-  constants.zoomCaption.textContent = e.target.alt;
-  popupWithImage.open();
-};
+//const handleZoom = (e) => {
+//  constants.zoomImage.src = e.target.src;
+//  constants.zoomCaption.textContent = e.target.alt;
+//  popupZoom.open();
+//};
+
+const popup = new Popup(popupForm);
+popup.setEventListeners();
+
+const zoomPopup = new PopupWithImage(popupZoomSelector);
+zoomPopup.setEventListeners();
 
 const defaultPlaceList = new Section(
   {
     items: initialPlaces,
     renderer: (item) => {
-      const card = new Card(item.name, item.link, constants.placeTemplate);
-      console.log(card);
+      const card = new Card(item, placeTemplateSelector, zoomPopup.open);
       const placeElement = card.generatePlace();
-      placeElement
-      .querySelector(".place__image")
-      .addEventListener("click", handleZoom);
       defaultPlaceList.addItem(placeElement);
     },
   },
-  constants.placesList
+  placesListSelector
 );
 
 defaultPlaceList.renderPlaces();
-
-const popupEditProfile = document.querySelector(".popup_edit-profile");
-const formProfile = popupEditProfile.querySelector(".popup__container");
-const popupAddPlace = document.querySelector(".popup_add-place");
-const formPlace = popupAddPlace.querySelector(".popup__container");
-
-
-/* функция открытия popup
-openPopup = (popup) => {
-  popup.classList.add("popup_opened");
-  document.body.style.overflow = "hidden";
-  // Добавляем слушатель на ESC
-  document.addEventListener("keydown", closePopupEsc);
-};
-
-// Функция закрытия popup
-const closePopup = (popup) => {
-  popup.classList.remove("popup_opened");
-  resetErrorState(popup);
-  document.body.style.overflow = "visible";
-  // Убираем слушатель на ESC
-  document.removeEventListener("keydown", closePopupEsc);
-};
-
-// Функция закрытия popup по ESC
-closePopupEsc = (evt) => {
-  if (evt.key === "Escape") {
-    const popupOpened = document.querySelector(".popup_opened");
-    closePopup(popupOpened);
-  }
-};*/
 
 /*
 const addPlace = () => {
@@ -146,36 +121,15 @@ const setOverlayListener = () => {
 };
 
 setOverlayListener();
-setCloseButtonListener();
+
 */
-/* SUBMIT NEW PLACE
-const submitNewPlaceForm = () => {
-  const name = params.placeNameInput.value;
-  const link = params.placeLinkInput.value;
-  const selector = params.placeTemplate;
-  prependPlace(getNewPlace(name, link, selector));
-};
-*/
-
-// Функция обновления данных профайла
-//const updateProfileData = () => {
-//  nameInput.value = nameProfile.textContent;
-//  jobInput.value = jobProfile.textContent;
+// SUBMIT NEW PLACE
+//const submitNewPlaceForm = () => {
+//  const name = constants.placeNameInput.value;
+//  const link = constants.placeLinkInput.value;
+//  const selector = constants.placeTemplate;
+//  prependPlace(getNewPlace(name, link, selector));
 //};
-
-//const editProfile = () => {
-//  userProfile.getUserInfo();
-//  Popup.open(params.formEditProfile);
-//};
-
-// SUBMIT PROFILE
-//const submitProfileForm = () => {
-//  const nameValue = nameInput.value;
-//  const jobValue = jobInput.value;
-//  nameProfile.textContent = nameValue;
-//  jobProfile.textContent = jobValue;
-//};
-
 
 /*
 formPlace.addEventListener("submit", (evt) => {
@@ -197,8 +151,7 @@ const fromAddPlaceValidator = new FormValidator(params.formAddPlace, params);
 fromAddPlaceValidator.enableValidation();
 */
 
-//const buttonEditProfile = new UserInfo();
-/*buttonEditProfile.setEventListeners();
+/*
 
 const buttonAddPlace = new PopupWithForm({
   popupSelector: params.formAddPlace,
@@ -218,24 +171,40 @@ buttonAddPlace.setEventListeners();
 //buttonZoomImage.addEventListeners();
 */
 
-const userInfo = new UserInfo({
-  nameUser: constants.nameProfile,
-  infoUser: constants.jobProfile,
+const userProfile = new UserInfo({
+  nameUser: nameProfile,
+  infoUser: jobProfile,
 });
 
-const popup = new Popup(selectors.formEditProfile);
-popup.setEventListeners();
+//const popupZoom = new PopupWithImage(popupZoomSelector);
+//popupZoom.setEventListeners();
 
-const popupWithImage = new PopupWithImage(selectors.popupZoom);
-popupWithImage.setEventListeners();
+// Добавление нового места
+const newPlaceForm = new PopupWithForm({
+  popupSelector: popupPlaceSelector,
+  handleFormSubmit: (formData) => {
+    const card = new Card(formData, placeTemplateSelector, zoomPopup);
+    const placeElement = card.generatePlace();
 
-formProfile.addEventListener("submit", (e) => {
-  e.preventDefault();
-  userInfo.setUserInfo();
-  popup.close();
+    document.querySelector(placesListSelector).prepend(placeElement);
+  },
+});
+newPlaceForm.setEventListeners();
+
+buttonAddPlace.addEventListener("click", () => {
+  newPlaceForm.open();
 });
 
-constants.buttonEditProfile.addEventListener("click", () => {
-  userInfo.getUserInfo();
-  popup.open();
+// Редактирование профайла
+const editProfileForm = new PopupWithForm({
+  popupSelector: popupProfileSelector,
+  handleFormSubmit: () => {
+    userProfile.setUserInfo();
+  }
+})
+editProfileForm.setEventListeners();
+
+buttonEditProfile.addEventListener("click", () => {
+  userProfile.getUserInfo();
+  editProfileForm.open();
 });

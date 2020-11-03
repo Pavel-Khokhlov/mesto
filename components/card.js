@@ -1,10 +1,11 @@
-import PopupWithImage from "./popupWithImage.js";
+import { zoomImage, zoomCaption, popupZoom, popupOpened } from "../utils/constants.js";
 
 class Card {
-  constructor(name, link, selector) {
-    this._name = name;
-    this._link = link;
+  constructor(item, selector, handleCardClick) {
+    this._name = item.name;
+    this._link = item.link;
     this._selector = selector;
+    this._handleCardClick = handleCardClick;
     this._likeButton = null;
     this._delButton = null;
   }
@@ -26,18 +27,23 @@ class Card {
     e.target.closest(".place").remove();
   }
 
+  _handleZoomImage() {
+    this._handleCardClick;
+  }
+
   _setEventsListeners() {
     this._likeButton.addEventListener("click", this._handleLike);
     this._delButton.addEventListener("click", this._handleDelete);
+    this._image.addEventListener("click", this._handleZoomImage);
   }
 
   generatePlace() {
     this._element = this._getTemplate();
     this._likeButton = this._element.querySelector(".place__like-btn");
     this._delButton = this._element.querySelector(".place__del-btn");
-    this._cardImage = this._element.querySelector(".place__image");
-    this._cardImage.src = this._link;
-    this._cardImage.alt = this._name;
+    this._image = this._element.querySelector(".place__image");
+    this._image.src = this._link;
+    this._image.alt = this._name;
     this._element.querySelector(".place__title").textContent = this._name;
     this._setEventsListeners();
     return this._element;
