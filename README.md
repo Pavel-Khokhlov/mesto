@@ -2,7 +2,8 @@
 
 * created class Section
 * created class Popup, UserInfo
-* created class PopupWithImage
+* created class PopupWithImage (not working)
+* created class PopupWithForm
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)
 
