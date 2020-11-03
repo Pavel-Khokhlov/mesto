@@ -1,4 +1,4 @@
-import {popupForm, popupOpened, popupCloseBtn} from "../utils/constants.js"
+import { popupForm, popupOpened, popupCloseBtn } from "../utils/constants.js";
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -26,21 +26,21 @@ export default class Popup {
     }
   }
 
- // _handleOverlayClose(e) {
- //   if (e.target === e.currentTarget) {
- //     this.close();
- //   }
- // }
+  _handleOverlayClose(e) {
+    if (e.target === e.currentTarget) {
+      this.close();
+    }
+  }
 
   setEventListeners() {
     this._popup
       .querySelector(popupCloseBtn)
       .addEventListener("click", this.close);
 
-    //this._overlayElement = this._popup.querySelector(".popup__container");
-    //this._overlayElement.addEventListener(
-    //  "click",
-    //  this._handleOverlayClose.bind(this)
-    //);
+    this._overlayElement = this._popup.closest(popupForm);
+    this._overlayElement.addEventListener(
+      "click",
+      this._handleOverlayClose.bind(this)
+    );
   }
 }
