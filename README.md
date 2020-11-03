@@ -4,6 +4,7 @@
 * created class Popup, UserInfo
 * created class PopupWithImage (not working)
 * created class PopupWithForm
+* refactor Overlay
 
 * [ссылка на проект](https://pavel-khokhlov.github.io/mesto/)
 
