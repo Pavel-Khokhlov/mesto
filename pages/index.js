@@ -24,14 +24,8 @@ import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
 //import FormValidator from "../components/formValidator.js";
 
-//let openPopup;
-//let closePopupEsc;
 //let resetErrorState;
 
-// Функция вывода нового места
-//const prependPlace = (element) => {
-//  selectors.placesList.prepend(element);
-//};
 /*
 const zoomImagePopup = new PopupWithImage(params.popupZoom);
 zoomImagePopup.setEventListeners();
@@ -78,11 +72,6 @@ const defaultPlaceList = new Section(
 
 defaultPlaceList.renderPlaces();
 
-/*
-const addPlace = () => {
-  openPopup(popupAddPlace);
-};*/
-
 /* Функция обнуления и скрытия errorMessage при открытии popup
 resetErrorState = (form) => {
   const inputArea = form.querySelectorAll(".popup__input");
@@ -97,16 +86,6 @@ resetErrorState = (form) => {
 };
 */
 
-/* Установка слушателей на кнопки close popup
-const setCloseButtonListener = () => {
-  document.querySelectorAll(".popup__close-btn").forEach((btn) => {
-    btn.addEventListener("click", function (event) {
-      const closeBtn = event.target.closest(params.popup);
-      closePopup(closeBtn);
-    });
-  });
-};
-*/
 /* Установка слушателя закрытия popup по overlay
 const setOverlayListener = () => {
   const overlayList = document.querySelectorAll(params.popup);
@@ -123,23 +102,7 @@ const setOverlayListener = () => {
 setOverlayListener();
 
 */
-// SUBMIT NEW PLACE
-//const submitNewPlaceForm = () => {
-//  const name = constants.placeNameInput.value;
-//  const link = constants.placeLinkInput.value;
-//  const selector = constants.placeTemplate;
-//  prependPlace(getNewPlace(name, link, selector));
-//};
 
-/*
-formPlace.addEventListener("submit", (evt) => {
-  evt.preventDefault();
-  submitNewPlaceForm();
-  closePopup(popupAddPlace);
-});
-*/
-//buttonEditProfile.addEventListener("click", editProfile);
-//buttonAddPlace.addEventListener("click", addPlace);
 /*
 const formEditProfileValidator = new FormValidator(
   params.formEditProfile,
@@ -152,20 +115,6 @@ fromAddPlaceValidator.enableValidation();
 */
 
 /*
-
-const buttonAddPlace = new PopupWithForm({
-  popupSelector: params.formAddPlace,
-  submitPlaceForm: (item) => {
-    const name = params.placeNameInput.value;
-    const link = params.placeLinkInput.value;
-    const selector = params.placeTemplate;
-      const card = new Card(name, link, selector);
-      const placeElement = card.generatePlace();
-      cardsList.setItem(placeElement);
-      PopupWithForm.close()
-  }
-});
-buttonAddPlace.setEventListeners();
 
 //const buttonZoomImage = new PopupWithImage();
 //buttonZoomImage.addEventListeners();

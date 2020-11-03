@@ -1,4 +1,4 @@
-import {popupOpened, popupCloseBtn} from "../utils/constants.js"
+import {popupForm, popupOpened, popupCloseBtn} from "../utils/constants.js"
 export default class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
@@ -7,7 +7,7 @@ export default class Popup {
   }
 
   open() {
-    this._popup.classList.add(popupOpened);
+    this._popup.closest(popupForm).classList.add(popupOpened);
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", (evt) => {
       this._handleEscClose(evt);
@@ -15,7 +15,7 @@ export default class Popup {
   }
 
   close() {
-    this._popup.classList.remove(popupOpened);
+    this._popup.closest(popupForm).classList.remove(popupOpened);
     document.body.style.overflow = "visible";
     document.removeEventListener("keydown", this._handleEscClose.bind(this));
   }
