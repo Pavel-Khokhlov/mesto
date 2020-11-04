@@ -1,6 +1,6 @@
 import { initialPlaces } from "../utils/data.js";
 import {
-  popupForm,
+  popupElement,
   placeTemplateSelector,
   placesListSelector,
   nameProfile,
@@ -26,43 +26,21 @@ import PopupWithForm from "../components/popupWithForm.js";
 
 //let resetErrorState;
 
-/*
-const zoomImagePopup = new PopupWithImage(params.popupZoom);
-zoomImagePopup.setEventListeners();
-
-
-const handleZoom = (e) => {
-  params.zoomImage.src = e.target.src;
-  params.zoomCaption.textContent = e.target.alt;
-  openPopup(params.popupZoom);
-};
-
-// Функция создания новой карточки
-function getNewPlace(name, link, selector) {
-  const card = new Card(name, link, selector);
-  // Создаём карточку и возвращаем наружу
-  const placeElement = card.generatePlace();
-  return placeElement;
-}
-
-*/
-//const handleZoom = (e) => {
-//  constants.zoomImage.src = e.target.src;
-//  constants.zoomCaption.textContent = e.target.alt;
-//  popupZoom.open();
-//};
-
-const popup = new Popup(popupForm);
+const popup = new Popup(popupElement);
 popup.setEventListeners();
 
 const zoomPopup = new PopupWithImage(popupZoomSelector);
 zoomPopup.setEventListeners();
 
+const openZoomPopup = (name, link) => {
+  zoomPopup.open(name, link);
+};
+
 const defaultPlaceList = new Section(
   {
     items: initialPlaces,
     renderer: (item) => {
-      const card = new Card(item, placeTemplateSelector, zoomPopup.open);
+      const card = new Card(item, placeTemplateSelector, openZoomPopup);
       const placeElement = card.generatePlace();
       defaultPlaceList.addItem(placeElement);
     },
@@ -114,25 +92,17 @@ const fromAddPlaceValidator = new FormValidator(params.formAddPlace, params);
 fromAddPlaceValidator.enableValidation();
 */
 
-/*
-
-//const buttonZoomImage = new PopupWithImage();
-//buttonZoomImage.addEventListeners();
-*/
 
 const userProfile = new UserInfo({
   nameUser: nameProfile,
   infoUser: jobProfile,
 });
 
-//const popupZoom = new PopupWithImage(popupZoomSelector);
-//popupZoom.setEventListeners();
-
 // Добавление нового места
 const newPlaceForm = new PopupWithForm({
   popupSelector: popupPlaceSelector,
   handleFormSubmit: (formData) => {
-    const card = new Card(formData, placeTemplateSelector, zoomPopup);
+    const card = new Card(formData, placeTemplateSelector, openZoomPopup);
     const placeElement = card.generatePlace();
 
     document.querySelector(placesListSelector).prepend(placeElement);
@@ -149,8 +119,8 @@ const editProfileForm = new PopupWithForm({
   popupSelector: popupProfileSelector,
   handleFormSubmit: () => {
     userProfile.setUserInfo();
-  }
-})
+  },
+});
 editProfileForm.setEventListeners();
 
 buttonEditProfile.addEventListener("click", () => {

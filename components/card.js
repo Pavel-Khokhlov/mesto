@@ -1,6 +1,12 @@
-import { zoomImage, zoomCaption, popupZoom, popupOpened } from "../utils/constants.js";
+import {
+  placeLikeBtn,
+  placeDelBtn,
+  placeImage,
+  placeTitle,
+  placeLikeActive,
+} from "../utils/constants.js";
 
-class Card {
+export default class Card {
   constructor(item, selector, handleCardClick) {
     this._name = item.name;
     this._link = item.link;
@@ -20,34 +26,32 @@ class Card {
   }
 
   _handleLike(e) {
-    e.target.classList.toggle("place__like-btn_active");
+    e.target.classList.toggle(placeLikeActive);
   }
 
   _handleDelete(e) {
     e.target.closest(".place").remove();
   }
 
-  _handleZoomImage() {
-    this._handleCardClick;
+  _handleZoomImage(name, link) {
+    this._handleCardClick(name, link);
   }
 
   _setEventsListeners() {
     this._likeButton.addEventListener("click", this._handleLike);
     this._delButton.addEventListener("click", this._handleDelete);
-    this._image.addEventListener("click", this._handleZoomImage);
+    this._image.addEventListener("click", () => this._handleZoomImage(this._name, this._link));
   }
 
   generatePlace() {
     this._element = this._getTemplate();
-    this._likeButton = this._element.querySelector(".place__like-btn");
-    this._delButton = this._element.querySelector(".place__del-btn");
-    this._image = this._element.querySelector(".place__image");
+    this._likeButton = this._element.querySelector(placeLikeBtn);
+    this._delButton = this._element.querySelector(placeDelBtn);
+    this._image = this._element.querySelector(placeImage);
     this._image.src = this._link;
     this._image.alt = this._name;
-    this._element.querySelector(".place__title").textContent = this._name;
+    this._element.querySelector(placeTitle).textContent = this._name;
     this._setEventsListeners();
     return this._element;
   }
 }
-
-export default Card;
