@@ -1,8 +1,3 @@
-export const constants = {
-  placeNameInput: document.querySelector(".popup__input_name-place"),
-  placeLinkInput: document.querySelector(".popup__input_link-place"),
-};
-
 // CLASS
 export const popupOpened = "popup_opened";
 export const placeLikeActive = "place__like-btn_active";

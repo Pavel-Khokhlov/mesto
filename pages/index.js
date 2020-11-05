@@ -14,7 +14,7 @@ import {
 import Card from "../components/card.js";
 import Section from "../components/section.js";
 import Popup from "../components/popup.js";
-import UserInfo from "../../components/userInfo.js";
+import UserInfo from "../components/userInfo.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
 import FormValidator from "../components/formValidator.js";
@@ -43,11 +43,11 @@ const defaultPlaceList = new Section(
 
 defaultPlaceList.renderPlaces();
 
-const formEditProfileValidator = new FormValidator(formProfile);
-formEditProfileValidator.enableValidation();
+const formProfileValidator = new FormValidator(formProfile);
+formProfileValidator.enableValidation();
 
-const fromAddPlaceValidator = new FormValidator(formPlace);
-fromAddPlaceValidator.enableValidation();
+const formPlaceValidator = new FormValidator(formPlace);
+formPlaceValidator.enableValidation();
 
 const userProfile = new UserInfo({
   nameUser: nameProfile,
@@ -67,6 +67,7 @@ const newPlaceForm = new PopupWithForm({
 newPlaceForm.setEventListeners();
 
 buttonAddPlace.addEventListener("click", () => {
+  formPlaceValidator.resetErrorState();
   newPlaceForm.open();
 });
 
@@ -80,6 +81,7 @@ const editProfileForm = new PopupWithForm({
 editProfileForm.setEventListeners();
 
 buttonEditProfile.addEventListener("click", () => {
+  formProfileValidator.resetErrorState();
   userProfile.getUserInfo();
   editProfileForm.open();
 });
