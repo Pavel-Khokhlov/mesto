@@ -2,19 +2,14 @@ import { initialPlaces } from "../utils/data.js";
 import {
   popupElement,
   placeTemplateSelector,
-  placesListSelector,
+  placesList,
   nameProfile,
   jobProfile,
-  popupZoomSelector,
-  popupProfileSelector,
-  popupPlaceSelector,
-  formSelector,
-  popupInput,
-  submitButtonSelector,
+  popupZoomImg,
+  formProfile,
+  formPlace,
   buttonEditProfile,
   buttonAddPlace,
-  inputNamePlace,
-  inputLinkPlace,
 } from "../utils/constants.js";
 import Card from "../components/card.js";
 import Section from "../components/section.js";
@@ -22,14 +17,12 @@ import Popup from "../components/popup.js";
 import UserInfo from "../../components/userInfo.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
-//import FormValidator from "../components/formValidator.js";
-
-//let resetErrorState;
+import FormValidator from "../components/formValidator.js";
 
 const popup = new Popup(popupElement);
 popup.setEventListeners();
 
-const zoomPopup = new PopupWithImage(popupZoomSelector);
+const zoomPopup = new PopupWithImage(popupZoomImg);
 zoomPopup.setEventListeners();
 
 const openZoomPopup = (name, link) => {
@@ -45,53 +38,16 @@ const defaultPlaceList = new Section(
       defaultPlaceList.addItem(placeElement);
     },
   },
-  placesListSelector
+  placesList
 );
 
 defaultPlaceList.renderPlaces();
 
-/* Функция обнуления и скрытия errorMessage при открытии popup
-resetErrorState = (form) => {
-  const inputArea = form.querySelectorAll(".popup__input");
-  inputArea.forEach((inputElement) => {
-    inputElement.value = "";
-    inputElement.classList.remove(params.inputInvalidClass);
-  });
-  const errorArea = form.querySelectorAll(".popup__input-error");
-  errorArea.forEach((errorElement) => {
-    errorElement.classList.remove(params.activeErrorClass);
-  });
-};
-*/
-
-/* Установка слушателя закрытия popup по overlay
-const setOverlayListener = () => {
-  const overlayList = document.querySelectorAll(params.popup);
-  overlayList.forEach((overlayElement) => {
-    overlayElement.addEventListener("click", (evt) => {
-      if (evt.target === overlayElement) {
-        const popupOpened = evt.target;
-        closePopup(popupOpened);
-      }
-    });
-  });
-};
-
-setOverlayListener();
-
-*/
-
-/*
-const formEditProfileValidator = new FormValidator(
-  params.formEditProfile,
-  params
-);
+const formEditProfileValidator = new FormValidator(formProfile);
 formEditProfileValidator.enableValidation();
 
-const fromAddPlaceValidator = new FormValidator(params.formAddPlace, params);
+const fromAddPlaceValidator = new FormValidator(formPlace);
 fromAddPlaceValidator.enableValidation();
-*/
-
 
 const userProfile = new UserInfo({
   nameUser: nameProfile,
@@ -100,12 +56,12 @@ const userProfile = new UserInfo({
 
 // Добавление нового места
 const newPlaceForm = new PopupWithForm({
-  popupSelector: popupPlaceSelector,
+  popupSelector: formPlace,
   handleFormSubmit: (formData) => {
     const card = new Card(formData, placeTemplateSelector, openZoomPopup);
     const placeElement = card.generatePlace();
 
-    document.querySelector(placesListSelector).prepend(placeElement);
+    document.querySelector(placesList).prepend(placeElement);
   },
 });
 newPlaceForm.setEventListeners();
@@ -116,7 +72,7 @@ buttonAddPlace.addEventListener("click", () => {
 
 // Редактирование профайла
 const editProfileForm = new PopupWithForm({
-  popupSelector: popupProfileSelector,
+  popupSelector: formProfile,
   handleFormSubmit: () => {
     userProfile.setUserInfo();
   },

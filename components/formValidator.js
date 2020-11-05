@@ -1,13 +1,22 @@
-class FormValidator {
-  constructor(formSelector, params) {
+import {
+  inputElement,
+  inputSelector,
+  submitButton,
+  activeErrorClass,
+  inputInvalidClass,
+  inactiveButtonClass,
+} from "../utils/constants.js";
+
+export default class FormValidator {
+  constructor(formSelector) {
     this._formSelector = formSelector;
     this._formElement = document.querySelector(formSelector);
-    this._inputElement = params.inputElement;
-    this._inputSelector = params.inputSelector;
-    this._submitButtonSelector = params.submitButtonSelector;
-    this._activeErrorClass = params.activeErrorClass;
-    this._inputInvalidClass = params.inputInvalidClass;
-    this._inactiveButtonClass = params.inactiveButtonClass;
+    this._inputElement = inputElement;
+    this._inputSelector = inputSelector;
+    this._submitButton = submitButton;
+    this._activeErrorClass = activeErrorClass;
+    this._inputInvalidClass = inputInvalidClass;
+    this._inactiveButtonClass = inactiveButtonClass;
   }
 
   // Функция показать ошибку ввода
@@ -65,7 +74,7 @@ class FormValidator {
       this._formElement.querySelectorAll(this._inputSelector)
     );
     const buttonElement = this._formElement.querySelector(
-      this._submitButtonSelector
+      this._submitButton
     );
 
     inputList.forEach((inputElement) => {
@@ -86,5 +95,3 @@ class FormValidator {
     this._setEventListeners();
   };
 }
-
-export default FormValidator;
