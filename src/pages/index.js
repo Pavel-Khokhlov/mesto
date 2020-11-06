@@ -1,3 +1,5 @@
+import "./index.css";
+
 import { initialPlaces } from "../utils/data.js";
 import {
   popupElement,
