@@ -90,7 +90,6 @@ export default class FormValidator {
     const inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );
-    //const buttonElement = this._formElement.querySelector(this._submitButton);
 
     inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {

@@ -18,9 +18,7 @@ export const inputNamePlace = document.querySelector(
 export const inputLinkPlace = document.querySelector(
   ".popup__input_link-place"
 );
-export const inputElement = document.querySelector(
-  ".popup__input"
-);
+export const inputElement = document.querySelector(".popup__input");
 export const popupZoom = document.querySelector(".popup-zoom");
 
 // SELECTORS

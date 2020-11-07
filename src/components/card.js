@@ -40,7 +40,9 @@ export default class Card {
   _setEventsListeners() {
     this._likeButton.addEventListener("click", this._handleLike);
     this._delButton.addEventListener("click", this._handleDelete);
-    this._image.addEventListener("click", () => this._handleZoomImage(this._name, this._link));
+    this._image.addEventListener("click", () =>
+      this._handleZoomImage(this._name, this._link)
+    );
   }
 
   generatePlace() {
