@@ -1,22 +1,20 @@
 import { nameInput, jobInput } from "../utils/constants.js";
 
 export default class UserInfo {
-  constructor({ nameUser, infoUser }) {
+  constructor({ nameUser, aboutUser }) {
     this._name = nameUser;
-    this._info = infoUser;
+    this._about = aboutUser;
     this._nameInput = nameInput;
     this._jobInput = jobInput;
   }
 
   getUserInfo() {
     this._nameInput.value = this._name.textContent;
-    this._jobInput.value = this._info.textContent;
-    return this._nameInput.value, this._jobInput.value;
+    this._jobInput.value = this._about.textContent;
   }
 
-  setUserInfo() {
-    this._name.textContent = this._nameInput.value;
-    this._info.textContent = this._jobInput.value;
-    return this._name.textContent, this._info.textContent;
+  setUserInfo(res) {
+    this._name.textContent = res.name;
+    this._about.textContent = res.about;
   }
 }

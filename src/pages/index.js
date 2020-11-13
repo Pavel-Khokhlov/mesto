@@ -1,18 +1,19 @@
 import "./index.css";
 
-import { initialPlaces } from "../utils/data.js";
 import {
   popupElement,
-  placeTemplateSelector,
+  placeTemplate,
   placesList,
   nameProfile,
   jobProfile,
+  avaProfile,
   popupZoomImg,
   formProfile,
   formPlace,
   buttonEditProfile,
   buttonAddPlace,
 } from "../utils/constants.js";
+
 import Card from "../components/card.js";
 import Section from "../components/section.js";
 import Popup from "../components/popup.js";
@@ -20,6 +21,22 @@ import UserInfo from "../components/userInfo.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
 import FormValidator from "../components/formValidator.js";
+import Api from "../components/api.js";
+
+const api = new Api({
+  url: "https://mesto.nomoreparties.co/v1/cohort-17",
+  headers: {
+    "Content-Type": "application/json",
+    authorization: "b69708fe-a60d-46f6-85e8-36b6dcb4edd6",
+  },
+});
+
+api.getUserInfo().then((data) => {
+  nameProfile.textContent = data.name;
+  jobProfile.textContent = data.about;
+  avaProfile.alt = data.name;
+  avaProfile.src = data.avatar;
+});
 
 const popup = new Popup(popupElement);
 popup.setEventListeners();
@@ -31,19 +48,21 @@ const openZoomPopup = (name, link) => {
   zoomPopup.open(name, link);
 };
 
-const defaultPlaceList = new Section(
-  {
-    items: initialPlaces,
-    renderer: (item) => {
-      const card = new Card(item, placeTemplateSelector, openZoomPopup);
-      const placeElement = card.generatePlace();
-      defaultPlaceList.addItem(placeElement);
+api.getPlaces().then((data) => {
+  const initialPlaces = data;
+  const serverPlaceList = new Section(
+    {
+      items: initialPlaces,
+      renderer: (item) => {
+        const card = new Card(item, placeTemplate, openZoomPopup);
+        const placeElement = card.generatePlace();
+        serverPlaceList.addItem(placeElement);
+      },
     },
-  },
-  placesList
-);
-
-defaultPlaceList.renderPlaces();
+    placesList
+  );
+  serverPlaceList.renderPlaces();
+});
 
 const formProfileValidator = new FormValidator(formProfile);
 formProfileValidator.enableValidation();
@@ -51,16 +70,11 @@ formProfileValidator.enableValidation();
 const formPlaceValidator = new FormValidator(formPlace);
 formPlaceValidator.enableValidation();
 
-const userProfile = new UserInfo({
-  nameUser: nameProfile,
-  infoUser: jobProfile,
-});
-
 // Добавление нового места
 const newPlaceForm = new PopupWithForm({
   popupSelector: formPlace,
   handleFormSubmit: (formData) => {
-    const card = new Card(formData, placeTemplateSelector, openZoomPopup);
+    const card = new Card(formData, placeTemplate, openZoomPopup);
     const placeElement = card.generatePlace();
 
     document.querySelector(placesList).prepend(placeElement);
@@ -74,10 +88,17 @@ buttonAddPlace.addEventListener("click", () => {
 });
 
 // Редактирование профайла
+const userProfile = new UserInfo({
+  nameUser: nameProfile,
+  aboutUser: jobProfile,
+});
+
 const editProfileForm = new PopupWithForm({
   popupSelector: formProfile,
   handleFormSubmit: () => {
-    userProfile.setUserInfo();
+    api.patchUserInfo().then((res) => {
+      userProfile.setUserInfo(res);
+    });
   },
 });
 editProfileForm.setEventListeners();

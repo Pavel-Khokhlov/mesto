@@ -9,6 +9,7 @@ export const inactiveButtonClass = "popup__save-btn_inactive";
 export const buttonEditProfile = document.querySelector(".profile__edit-btn");
 export const nameProfile = document.querySelector(".profile__name");
 export const jobProfile = document.querySelector(".profile__job");
+export const avaProfile = document.querySelector(".profile__avatar");
 export const nameInput = document.querySelector(".popup__input_name-profile");
 export const jobInput = document.querySelector(".popup__input_job-profile");
 export const buttonAddPlace = document.querySelector(".profile__add-btn");
@@ -23,7 +24,7 @@ export const popupZoom = document.querySelector(".popup-zoom");
 
 // SELECTORS
 export const placesList = ".places";
-export const placeTemplateSelector = ".place-template";
+export const placeTemplate = ".place-template";
 export const placeLikeBtn = ".place__like-btn";
 export const placeDelBtn = ".place__del-btn";
 export const placeImage = ".place__image";
