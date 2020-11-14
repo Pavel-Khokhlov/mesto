@@ -25,7 +25,10 @@
     <!-- PROFILE -->
 
     <section class="profile">
-      <img src="#src" alt="#alt" class="profile__avatar">
+      <div class="profile__avatar-area">
+        <img src="#src" alt="#alt" class="profile__avatar">
+        <button type="button" class="profile__avatar-btn" aria-label="Редактировать аватар"></button>
+      </div>
       <div class="profile__info">
         <div class="profile__block-name">
           <h1 class="profile__name"></h1>
@@ -64,6 +67,19 @@
     </form>
   </section>
 
+  <!-- POPUP UDATE AVATAR -->
+
+  <section class="popup">
+    <form class="popup__container popup_edit-avatar" method="post" novalidate>
+      <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <input type="url" id="avatarLink" name="link" class="popup__input popup__input_avatar-link"
+        placeholder="Ссылка на аватар" autocomplete="off" required>
+      <span id="avatarLink-error" class="popup__input-error"></span>
+      <button type="submit" class="popup__save-btn" aria-label="Сохранить новый аватар">Сохранить</button>
+    </form>
+  </section>
+
   <!-- POPUP ADD PLACE -->
 
   <section class="popup">
@@ -88,6 +104,16 @@
       <img src="#" alt="name" class="popup-zoom__image">
       <figcaption class="popup-zoom__caption">name</figcaption>
     </figure>
+  </section>
+
+  <!-- POPUP DELETE PLACE -->
+
+  <section class="popup">
+    <form class="popup__container popup_del-place" method="post" novalidate>
+      <button type="button" class="button popup__close-btn" aria-label="Вернуться на страницу"></button>
+      <h2 class="popup__title">Вы уверенны?</h2>
+      <button type="submit" class="popup__save-btn" aria-label="Удалить место">Да</button>
+    </form>
   </section>
 
   <!-- PLACE TEMPLATE -->

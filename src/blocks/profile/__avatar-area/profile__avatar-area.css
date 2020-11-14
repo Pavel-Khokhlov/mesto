@@ -1,0 +1,11 @@
+.profile__avatar-area {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.profile__avatar-area:hover .profile__avatar-btn {
+  opacity: 1;
+}

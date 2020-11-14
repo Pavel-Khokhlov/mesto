@@ -6,12 +6,14 @@ import {
   placesList,
   nameProfile,
   jobProfile,
-  avaProfile,
+  userAvatar,
   popupZoomImg,
   formProfile,
+  formAvatar,
   formPlace,
   buttonEditProfile,
   buttonAddPlace,
+  buttonAvatar,
 } from "../utils/constants.js";
 
 import Card from "../components/card.js";
@@ -34,8 +36,8 @@ const api = new Api({
 api.getUserInfo().then((data) => {
   nameProfile.textContent = data.name;
   jobProfile.textContent = data.about;
-  avaProfile.alt = data.name;
-  avaProfile.src = data.avatar;
+  userAvatar.alt = data.name;
+  userAvatar.src = data.avatar;
 });
 
 const popup = new Popup(popupElement);
@@ -67,6 +69,9 @@ api.getPlaces().then((data) => {
 const formProfileValidator = new FormValidator(formProfile);
 formProfileValidator.enableValidation();
 
+const formAvatarValidator = new FormValidator(formAvatar);
+formAvatarValidator.enableValidation();
+
 const formPlaceValidator = new FormValidator(formPlace);
 formPlaceValidator.enableValidation();
 
@@ -76,8 +81,12 @@ const newPlaceForm = new PopupWithForm({
   handleFormSubmit: (formData) => {
     const card = new Card(formData, placeTemplate, openZoomPopup);
     const placeElement = card.generatePlace();
-
-    document.querySelector(placesList).prepend(placeElement);
+    api.newPlace().then((result) => {
+      if (result.ok) {
+        document.querySelector(placesList).prepend(placeElement);
+      }
+      return;
+    });
   },
 });
 newPlaceForm.setEventListeners();
@@ -107,4 +116,20 @@ buttonEditProfile.addEventListener("click", () => {
   formProfileValidator.resetErrorState();
   userProfile.getUserInfo();
   editProfileForm.open();
+});
+
+// Обновление Аватарки
+const updateAvatar = new PopupWithForm({
+  popupSelector: formAvatar,
+  handleFormSubmit: () => {
+    api.patchUserAvatar().then((res) => {
+      userProfile.setUserAvatar(res);
+    });
+  },
+});
+updateAvatar.setEventListeners();
+
+buttonAvatar.addEventListener("click", () => {
+  formAvatarValidator.resetErrorState();
+  updateAvatar.open();
 });

@@ -1,4 +1,4 @@
-import { nameInput, jobInput } from "../utils/constants.js";
+import { nameInput, jobInput, userAvatar } from "../utils/constants.js";
 
 export default class UserInfo {
   constructor({ nameUser, aboutUser }) {
@@ -6,6 +6,7 @@ export default class UserInfo {
     this._about = aboutUser;
     this._nameInput = nameInput;
     this._jobInput = jobInput;
+    this._avatar = userAvatar;
   }
 
   getUserInfo() {
@@ -16,5 +17,10 @@ export default class UserInfo {
   setUserInfo(res) {
     this._name.textContent = res.name;
     this._about.textContent = res.about;
+  }
+
+  setUserAvatar(res) {
+    this._avatar.src = res.avatar;
+    this._avatar.alt = res.name;
   }
 }

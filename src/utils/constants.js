@@ -9,9 +9,13 @@ export const inactiveButtonClass = "popup__save-btn_inactive";
 export const buttonEditProfile = document.querySelector(".profile__edit-btn");
 export const nameProfile = document.querySelector(".profile__name");
 export const jobProfile = document.querySelector(".profile__job");
-export const avaProfile = document.querySelector(".profile__avatar");
 export const nameInput = document.querySelector(".popup__input_name-profile");
 export const jobInput = document.querySelector(".popup__input_job-profile");
+export const buttonAvatar = document.querySelector(".profile__avatar-btn");
+export const userAvatar = document.querySelector(".profile__avatar");
+export const avatarLinkInput = document.querySelector(
+  ".popup__input_avatar-link"
+);
 export const buttonAddPlace = document.querySelector(".profile__add-btn");
 export const inputNamePlace = document.querySelector(
   ".popup__input_name-place"
@@ -37,6 +41,7 @@ export const popupZoomImg = ".popup-zoom";
 export const zoomImage = ".popup-zoom__image";
 export const zoomCaption = ".popup-zoom__caption";
 export const formProfile = ".popup_edit-profile";
+export const formAvatar = ".popup_edit-avatar";
 export const formPlace = ".popup_add-place";
 
 export const inputSelector = ".popup__input";
