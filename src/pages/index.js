@@ -58,6 +58,10 @@ const api = new Api({
   },
 });
 
+const handleLikeClick = (cardId) => {
+  api.addLike(cardId);
+}
+
 // FUNCTION TO GET USER INFO FROM SERVER
 api.getUserInfo().then((data) => {
   nameProfile.textContent = data.name;
@@ -74,7 +78,7 @@ api.getPlaces().then((data) => {
     {
       items: initialPlaces,
       renderer: (item) => {
-        const card = new Card(item, placeTemplate, openZoomPopup);
+        const card = new Card(item, placeTemplate, openZoomPopup, handleLikeClick);
         const placeElement = card.generatePlace();
         serverPlaceList.addItem(placeElement);
       },
@@ -87,11 +91,11 @@ api.getPlaces().then((data) => {
 // FUNCTION TO ADD NEW PLACE
 const newPlaceForm = new PopupWithForm({
   popupSelector: formPlace,
-  handleFormSubmit: (formData) => {
+  handleFormSubmit: () => {
     newPlaceForm.changeBtnText();
-    const card = new Card(formData, placeTemplate, openZoomPopup);
-    const placeElement = card.generatePlace();
     api.newPlace().then((res) => {
+    const card = new Card(res, placeTemplate, openZoomPopup, handleLikeClick);
+    const placeElement = card.generatePlace();
       document.querySelector(placesList).prepend(placeElement);
     });
     newPlaceForm.close();

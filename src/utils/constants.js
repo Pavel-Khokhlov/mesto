@@ -36,7 +36,7 @@ export const placeLikeBtn = ".place__like-btn";
 export const placeDelBtn = ".place__del-btn";
 export const placeImage = ".place__image";
 export const placeTitle = ".place__title";
-export const placeLikeSum = ".place__like-sum";
+export const placeLikeCount = ".place__like-count";
 
 export const popupElement = ".popup";
 export const formSelector = ".popup__container";
