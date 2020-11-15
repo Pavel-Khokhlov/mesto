@@ -1,5 +1,5 @@
 import Popup from "./popup.js";
-import { inputSelector } from "../utils/constants.js";
+import { inputSelector, submitButton } from "../utils/constants.js";
 
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
@@ -16,10 +16,19 @@ export default class PopupWithForm extends Popup {
     );
     return this._formValues;
   }
+  
+  changeBtnText() {
+    this._popupElement.querySelector(
+      submitButton
+    ).textContent = `Сохранение...`;
+  }
 
   close() {
     super.close();
     this._popupElement.reset();
+    this._popupElement.querySelector(
+      submitButton
+    ).textContent = `Сохранить`;
   }
 
   setEventListeners() {
@@ -27,7 +36,6 @@ export default class PopupWithForm extends Popup {
 
     this._popupElement.addEventListener("submit", () => {
       this._handleFormSubmit(this._getInputValues());
-      this.close();
     });
   }
 }

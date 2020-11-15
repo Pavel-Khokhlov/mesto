@@ -1,6 +1,7 @@
 @import url(../vendor/normalize.css);
 @import url(../vendor/fonts/fonts.css);
 @import url(../blocks/root/root.css);
+@import url(../blocks/paragraph/paragraph.css);
 @import url(../blocks/header/header.css);
 @import url(../blocks/logo/logo.css);
 @import url(../blocks/main/main.css);
@@ -11,4 +12,6 @@
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup-zoom/popup-zoom.css);
+
 @import url(../blocks/popup/_opened/popup_opened.css);
+@import url(../blocks/place/__del-btn/_disable/place__del-btn_disable.css);

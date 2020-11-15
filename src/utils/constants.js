@@ -4,6 +4,7 @@ export const placeLikeActive = "place__like-btn_active";
 export const inputInvalidClass = "popup__input_invalid";
 export const activeErrorClass = "popup__input-error_active";
 export const inactiveButtonClass = "popup__save-btn_inactive";
+export const disableDeleteBtn = "place__del-btn_disable"
 
 // ELEMENTS
 export const buttonEditProfile = document.querySelector(".profile__edit-btn");
@@ -25,6 +26,8 @@ export const inputLinkPlace = document.querySelector(
 );
 export const inputElement = document.querySelector(".popup__input");
 export const popupZoom = document.querySelector(".popup-zoom");
+export const elementFormProfile = document.querySelector(".popup_edit-profile");
+export const elementFormAvatar = document.querySelector(".popup_edit-avatar");
 
 // SELECTORS
 export const placesList = ".places";
@@ -33,6 +36,7 @@ export const placeLikeBtn = ".place__like-btn";
 export const placeDelBtn = ".place__del-btn";
 export const placeImage = ".place__image";
 export const placeTitle = ".place__title";
+export const placeLikeSum = ".place__like-sum";
 
 export const popupElement = ".popup";
 export const formSelector = ".popup__container";

@@ -1,6 +1,7 @@
 @import url(__image/place__image.css);
 @import url(__info/place__info.css);
 @import url(__title/place__title.css);
+@import url(__like-area/place__like-area.css);
 @import url(__like-btn/place__like-btn.css);
 @import url(__del-btn/place__del-btn.css);
 @import url(__like-btn/_active/place__like-btn_active.css);

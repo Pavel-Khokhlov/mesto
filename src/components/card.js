@@ -1,20 +1,26 @@
 import {
+  nameProfile,
   placeLikeBtn,
+  placeLikeSum,
   placeDelBtn,
   placeImage,
   placeTitle,
-  //  placeLikeActive,
+  placeLikeActive,
+  disableDeleteBtn,
 } from "../utils/constants.js";
 
 export default class Card {
-  constructor(data, selector, handleCardClick) {
+  constructor(data, selector, handleCardClick, handleLikeClick, handleDelClick) {
     this._name = data.name;
     this._link = data.link;
-    this._id = data.id;
+    this._likes = data.likes;
+    this._id = data._id;
+    this._userId = nameProfile.id;
+    this._owner = data.owner;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
-    //  this._likeButton = null;
-    //  this._delButton = null;
+    this._handleLikeClick = handleLikeClick;
+    this._handleDelClick = handleDelClick;
   }
 
   _getTemplate() {
@@ -26,21 +32,21 @@ export default class Card {
     return placeElement;
   }
 
-  //_handleLike(e) {
-  //  e.target.classList.toggle(placeLikeActive);
-  //}
-  //
-  //_handleDelete(e) {
-  //  e.target.closest(".place").remove();
-  //}
-  //
+  _isLiked() {
+    return this._likes.find(({ _id }) => _id === this._userId);
+  }
+
+  _handleLike(e) {
+    e.target.classList.toggle(placeLikeActive);
+  }
+
   _handleZoomImage(name, link) {
     this._handleCardClick(name, link);
   }
-  //
+  
   _setEventsListeners() {
-    //this._likeButton.addEventListener("click", this._handleLike);
-    //  this._delButton.addEventListener("click", this.//_handleDelete);
+    this._likeButton.addEventListener("click", this._handleLikeClick);
+    this._delButton.addEventListener("click", this._handleDelClick);
     this._image.addEventListener("click", () =>
       this._handleZoomImage(this._name, this._link)
     );
@@ -54,6 +60,12 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = this._name;
     this._element.querySelector(placeTitle).textContent = this._name;
+    this._likeSum = this._element.querySelector(placeLikeSum);
+    //if (this._owner === this._userId) {
+    //  this._delButton.classList.remove(disableDeleteBtn);
+    //} else {
+    //  this._delButton.classList.add(disableDeleteBtn);
+    //}
     this._setEventsListeners();
     return this._element;
   }
