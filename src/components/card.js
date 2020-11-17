@@ -24,6 +24,7 @@ export default class Card {
     this._userId = nameProfile.id;
     this._owner = data.owner._id;
     this._selector = selector;
+    this._myLikes = null;
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDelClick = handleDelClick;
@@ -38,24 +39,27 @@ export default class Card {
     return placeElement;
   }
 
-  _isLiked() {
-    return this._likes.find(({ _id }) => _id === this._userId);
+  _handleLiked() {
+    this._handleLikeClick(this);
   }
 
-  //_handleLikeClick(e) {
-  //  e.target.classList.toggle(placeLikeActive);
-  //}
+  toggleLike(res) {
+    this._likeButton.classList.toggle(placeLikeActive);
+    this._likeCount.textContent = res.likes.length;
+    this._likes = res.likes;
+  }
 
   _handleZoomImage(name, link) {
     this._handleCardClick(name, link);
   }
 
+  _handleDelete() {
+    this._handleDelClick(this._element, this._cardId);
+  }
+
   _setEventsListeners() {
-    this._likeButton.addEventListener(
-      "click",
-      this._handleLikeClick(this._cardId)
-    );
-    this._delButton.addEventListener("click", this._handleDelClick);
+    this._likeButton.addEventListener("click", () => this._handleLiked());
+    this._delButton.addEventListener("click", () => this._handleDelete());
     this._image.addEventListener("click", () =>
       this._handleZoomImage(this._name, this._link)
     );
@@ -69,20 +73,23 @@ export default class Card {
     this._image.src = this._link;
     this._image.alt = this._name;
     this._element.querySelector(placeTitle).textContent = this._name;
-    this._likeSum = this._element.querySelector(placeLikeCount);
-    this._likeSum.textContent = this._likes.length;
+    this._likeCount = this._element.querySelector(placeLikeCount);
+    this._likeCount.textContent = this._likes.length;
+
     // SET DELETE BTN TO MY CARD
     if (this._owner === this._userId) {
       this._delButton.classList.remove(disableDeleteBtn);
     } else {
       this._delButton.classList.add(disableDeleteBtn);
     }
+
     // SET ACTIVE LIKE TO MY LIKES
-    if (this._isLiked) {
-      this._likeButton.classList.remove(placeLikeActive);
-    } else {
+    if (!!this._likes.find(({ _id }) => _id === nameProfile.id)) {
       this._likeButton.classList.add(placeLikeActive);
+    } else {
+      this._likeButton.classList.remove(placeLikeActive);
     }
+
     this._setEventsListeners();
     return this._element;
   }

@@ -11,12 +11,16 @@ import {
   formProfile,
   formAvatar,
   formPlace,
+  formConfirmDelPlace,
   buttonEditProfile,
   buttonAddPlace,
   buttonAvatar,
+  placeLikeBtn,
+  placeLikeActive,
   elementFormProfile,
   elementFormAvatar,
   submitButton,
+  placeLikeCount,
 } from "../utils/constants.js";
 
 import Card from "../components/card.js";
@@ -25,6 +29,7 @@ import Popup from "../components/popup.js";
 import UserInfo from "../components/userInfo.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
+import PopupWithConfirm from "../components/popupWithConfirm.js";
 import FormValidator from "../components/formValidator.js";
 import Api from "../components/api.js";
 
@@ -58,11 +63,21 @@ const api = new Api({
   },
 });
 
-const handleLikeClick = (cardId) => {
-  api.addLike(cardId);
-}
+// LIKES
+const handleLikeClick = (card) => {
+  const placeId = card._cardId;
+  if (card._likes.find((item) => item._id === nameProfile.id)) {
+    api.removeLike(placeId).then((res) => {
+      card.toggleLike(res);
+    });
+  } else {
+    api.addLike(placeId).then((res) => {
+      card.toggleLike(res);
+    });
+  }
+};
 
-// FUNCTION TO GET USER INFO FROM SERVER
+// GET USER INFO FROM SERVER
 api.getUserInfo().then((data) => {
   nameProfile.textContent = data.name;
   jobProfile.textContent = data.about;
@@ -71,14 +86,20 @@ api.getUserInfo().then((data) => {
   nameProfile.id = data._id;
 });
 
-// FUNCTION TO GET PLACES FROM SERVER
+// GET PLACES FROM SERVER
 api.getPlaces().then((data) => {
   const initialPlaces = data;
   const serverPlaceList = new Section(
     {
       items: initialPlaces,
       renderer: (item) => {
-        const card = new Card(item, placeTemplate, openZoomPopup, handleLikeClick);
+        const card = new Card(
+          item,
+          placeTemplate,
+          openZoomPopup,
+          handleLikeClick,
+          handleDelClick
+        );
         const placeElement = card.generatePlace();
         serverPlaceList.addItem(placeElement);
       },
@@ -88,17 +109,27 @@ api.getPlaces().then((data) => {
   serverPlaceList.renderPlaces();
 });
 
-// FUNCTION TO ADD NEW PLACE
+// ADD NEW PLACE
 const newPlaceForm = new PopupWithForm({
   popupSelector: formPlace,
   handleFormSubmit: () => {
     newPlaceForm.changeBtnText();
-    api.newPlace().then((res) => {
-    const card = new Card(res, placeTemplate, openZoomPopup, handleLikeClick);
-    const placeElement = card.generatePlace();
-      document.querySelector(placesList).prepend(placeElement);
-    });
-    newPlaceForm.close();
+    api
+      .newPlace()
+      .then((res) => {
+        const card = new Card(
+          res,
+          placeTemplate,
+          openZoomPopup,
+          handleLikeClick,
+          handleDelClick
+        );
+        const placeElement = card.generatePlace();
+        document.querySelector(placesList).prepend(placeElement);
+      })
+      .then(() => {
+        newPlaceForm.close();
+      });
   },
 });
 newPlaceForm.setEventListeners();
@@ -107,6 +138,26 @@ buttonAddPlace.addEventListener("click", () => {
   formPlaceValidator.resetErrorState();
   newPlaceForm.open();
 });
+
+// CONFIRM TO DELETE PLACE
+
+
+// DELETE PLACE
+const handleDelClick = (element, cardId) => {
+  const placeId = cardId;
+  const placeElement = element;
+  debugger;
+  const confirmDelPlace = new PopupWithConfirm({
+    popupSelector: formConfirmDelPlace,
+    handleSubmitYes: (placeId) => {
+      api.deleteCard(placeId).then(() => {
+        placeElement.remove();
+      });
+    },
+  });
+  confirmDelPlace.open();
+  confirmDelPlace.setEventListeners();
+};
 
 // EDIT USER INFO
 const userProfile = new UserInfo({
@@ -118,10 +169,14 @@ const editProfileForm = new PopupWithForm({
   popupSelector: formProfile,
   handleFormSubmit: () => {
     editProfileForm.changeBtnText();
-    api.patchUserInfo().then((res) => {
-      userProfile.setUserInfo(res);
-      editProfileForm.close();
-    });
+    api
+      .patchUserInfo()
+      .then((res) => {
+        userProfile.setUserInfo(res);
+      })
+      .then(() => {
+        editProfileForm.close();
+      });
   },
 });
 editProfileForm.setEventListeners();
@@ -137,10 +192,14 @@ const updateAvatar = new PopupWithForm({
   popupSelector: formAvatar,
   handleFormSubmit: () => {
     updateAvatar.changeBtnText();
-    api.patchUserAvatar().then((res) => {
-      userProfile.setUserAvatar(res);
-      updateAvatar.close();
-    });
+    api
+      .patchUserAvatar()
+      .then((res) => {
+        userProfile.setUserAvatar(res);
+      })
+      .then(() => {
+        updateAvatar.close();
+      });
   },
 });
 updateAvatar.setEventListeners();

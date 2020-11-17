@@ -47,6 +47,7 @@ export const zoomCaption = ".popup-zoom__caption";
 export const formProfile = ".popup_edit-profile";
 export const formAvatar = ".popup_edit-avatar";
 export const formPlace = ".popup_add-place";
+export const formConfirmDelPlace = ".popup_del-place";
 
 export const inputSelector = ".popup__input";
 export const submitButton = ".popup__save-btn";

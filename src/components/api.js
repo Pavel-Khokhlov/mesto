@@ -26,7 +26,7 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
       });
   }
 
@@ -49,7 +49,7 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
       });
   }
 
@@ -67,7 +67,7 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
       });
   }
 
@@ -90,7 +90,7 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
       });
   }
 
@@ -112,7 +112,7 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
       });
   }
 
@@ -131,26 +131,45 @@ export default class Api {
         return data;
       })
       .catch((err) => {
-        alert(err);
+        console.log(err);
       });
   }
-  
-  //removeLike(cardId) {
-  //  return fetch(`${this.url}/cards/likes/${cardId}`, {
-  //    method: "DELETE",
-  //    headers: this.headers,
-  //  })
-  //    .then((res) => {
-  //      if (!res.ok) {
-  //        Promise.reject(`Error ${res.status}`);
-  //      }
-  //      return res.json();
-  //    })
-  //    .then((data) => {
-  //      return data;
-  //    })
-  //    .catch((err) => {
-  //      alert(err);
-  //    });
-  //}
+
+  removeLike(cardId) {
+    return fetch(`${this.url}/cards/likes/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          Promise.reject(`Error ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this.url}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this.headers,
+    })
+      .then((res) => {
+        if (!res.ok) {
+          Promise.reject(`Error ${res.status}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
 }
