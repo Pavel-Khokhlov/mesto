@@ -9,15 +9,27 @@ export default class PopupWithConfirm extends Popup {
     this._handleSubmitYes = handleSubmitYes;
   }
 
-  open(placeId) {
-    this._cardId = placeId;
+  open() {
     super.open();
+  }
+
+  changeBtnText() {
+    this._popupElement.querySelector(
+      submitButton
+    ).textContent = `Удаление...`;
+  }
+
+  close() {
+    super.close();
+    this._popupElement.querySelector(
+      submitButton
+    ).textContent = `Да`;
   }
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupElement.querySelector(submitButton).addEventListener("click", () =>
-      this._handleSubmitYes(this._cardId)
-    );
+    this._popupElement
+      .querySelector(submitButton)
+      .addEventListener("click", () => this._handleSubmitYes(this._cardId));
   }
 }

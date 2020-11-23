@@ -146,6 +146,7 @@ const handleDelClick = (element, card) => {
   const confirmDelPlace = new PopupWithConfirm({
     popupSelector: formConfirmDelPlace,
     handleSubmitYes: () => {
+      confirmDelPlace.changeBtnText();
       api.deleteCard(cardId).then((res) => {
         console.log(res);
       }).then(() => {
