@@ -1,4 +1,5 @@
 .logo {
   width: max(103.74px, min(103.74px + calc((100vw - 320px) / 11.7), 142.01px));
-  padding-left: max(0px, min(0px + calc((936px - 100vw) / 2), 27px));
+  padding-left: 20px;
+  /*padding-left: max(0px, min(0px + calc((936px - 100vw) / 2), 27px));*/
 }

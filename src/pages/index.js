@@ -139,20 +139,20 @@ buttonAddPlace.addEventListener("click", () => {
   newPlaceForm.open();
 });
 
-// CONFIRM TO DELETE PLACE
-
-
 // DELETE PLACE
-const handleDelClick = (element, cardId) => {
-  const placeId = cardId;
+const handleDelClick = (element, card) => {
   const placeElement = element;
-  debugger;
+  const cardId = card;
   const confirmDelPlace = new PopupWithConfirm({
     popupSelector: formConfirmDelPlace,
-    handleSubmitYes: (placeId) => {
-      api.deleteCard(placeId).then(() => {
+    handleSubmitYes: () => {
+      api.deleteCard(cardId).then((res) => {
+        console.log(res);
+      }).then(() => {
         placeElement.remove();
-      });
+      }).then(() => {
+        confirmDelPlace.close();
+      })
     },
   });
   confirmDelPlace.open();

@@ -24,7 +24,6 @@ export default class Card {
     this._userId = nameProfile.id;
     this._owner = data.owner._id;
     this._selector = selector;
-    this._myLikes = null;
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
     this._handleDelClick = handleDelClick;
@@ -53,13 +52,13 @@ export default class Card {
     this._handleCardClick(name, link);
   }
 
-  _handleDelete() {
-    this._handleDelClick(this._element, this._cardId);
+  _handleDelete(element, card) {
+    this._handleDelClick(element, card);
   }
 
   _setEventsListeners() {
     this._likeButton.addEventListener("click", () => this._handleLiked());
-    this._delButton.addEventListener("click", () => this._handleDelete());
+    this._delButton.addEventListener("click", () => this._handleDelete(this._element, this._cardId));
     this._image.addEventListener("click", () =>
       this._handleZoomImage(this._name, this._link)
     );
@@ -83,7 +82,7 @@ export default class Card {
       this._delButton.classList.add(disableDeleteBtn);
     }
 
-    // SET ACTIVE LIKE TO MY LIKES
+    // SET ACTIVE TO MY LIKES
     if (!!this._likes.find(({ _id }) => _id === nameProfile.id)) {
       this._likeButton.classList.add(placeLikeActive);
     } else {

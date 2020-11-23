@@ -127,9 +127,6 @@ export default class Api {
         }
         return res.json();
       })
-      .then((data) => {
-        return data;
-      })
       .catch((err) => {
         console.log(err);
       });
@@ -146,9 +143,6 @@ export default class Api {
         }
         return res.json();
       })
-      .then((data) => {
-        return data;
-      })
       .catch((err) => {
         console.log(err);
       });
@@ -164,9 +158,6 @@ export default class Api {
           Promise.reject(`Error ${res.status}`);
         }
         return res.json();
-      })
-      .then((data) => {
-        return data;
       })
       .catch((err) => {
         console.log(err);
