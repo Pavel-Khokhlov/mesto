@@ -6,6 +6,13 @@ import {
   inputLinkPlace,
 } from "../utils/constants.js";
 
+const checkPromise = (res) => {
+  if (!res.ok) {
+    Promise.reject(`Error ${res.status}`);
+  }
+  return res.json();
+};
+
 export default class Api {
   constructor(config) {
     this.url = config.url;
@@ -16,12 +23,7 @@ export default class Api {
     return fetch(`${this.url}/cards`, {
       headers: this.headers,
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .then((data) => {
         return data;
       })
@@ -39,12 +41,7 @@ export default class Api {
         link: inputLinkPlace.value,
       }),
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .then((data) => {
         return data;
       })
@@ -57,12 +54,7 @@ export default class Api {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .then((data) => {
         return data;
       })
@@ -80,12 +72,7 @@ export default class Api {
         about: jobInput.value,
       }),
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .then((data) => {
         return data;
       })
@@ -102,15 +89,7 @@ export default class Api {
         avatar: avatarLinkInput.value,
       }),
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
-      .then((data) => {
-        return data;
-      })
+      .then(checkPromise)
       .catch((err) => {
         console.log(err);
       });
@@ -121,12 +100,7 @@ export default class Api {
       method: "PUT",
       headers: this.headers,
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .catch((err) => {
         console.log(err);
       });
@@ -137,12 +111,7 @@ export default class Api {
       method: "DELETE",
       headers: this.headers,
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .catch((err) => {
         console.log(err);
       });
@@ -153,12 +122,7 @@ export default class Api {
       method: "DELETE",
       headers: this.headers,
     })
-      .then((res) => {
-        if (!res.ok) {
-          Promise.reject(`Error ${res.status}`);
-        }
-        return res.json();
-      })
+      .then(checkPromise)
       .catch((err) => {
         console.log(err);
       });

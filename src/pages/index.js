@@ -15,12 +15,6 @@ import {
   buttonEditProfile,
   buttonAddPlace,
   buttonAvatar,
-  placeLikeBtn,
-  placeLikeActive,
-  elementFormProfile,
-  elementFormAvatar,
-  submitButton,
-  placeLikeCount,
 } from "../utils/constants.js";
 
 import Card from "../components/card.js";
@@ -56,10 +50,10 @@ formPlaceValidator.enableValidation();
 
 // API
 const api = new Api({
-  url: "https://mesto.nomoreparties.co/v1/cohort-17",
+  url: "https://mesto.nomoreparties.co/v1/cohort-18",
   headers: {
     "Content-Type": "application/json",
-    authorization: "b69708fe-a60d-46f6-85e8-36b6dcb4edd6",
+    authorization: "87b27e82-ce10-439c-bbe6-2acce8f72cdc",
   },
 });
 
