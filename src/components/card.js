@@ -11,18 +11,18 @@ import {
 
 export default class Card {
   constructor(
-    data,
+    res,
     selector,
     handleCardClick,
     handleLikeClick,
     handleDelClick
   ) {
-    this._name = data.name;
-    this._link = data.link;
-    this._likes = data.likes;
-    this._cardId = data._id;
+    this._name = res.name;
+    this._link = res.link;
+    this._likes = res.likes;
+    this._cardId = res._id;
     this._userId = nameProfile.id;
-    this._owner = data.owner._id;
+    this._owner = res.owner._id;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;

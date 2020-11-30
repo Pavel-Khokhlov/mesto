@@ -6,13 +6,6 @@ import {
   inputLinkPlace,
 } from "../utils/constants.js";
 
-const checkPromise = (res) => {
-  if (!res.ok) {
-    Promise.reject(`Error ${res.status}`);
-  }
-  return res.json();
-};
-
 export default class Api {
   constructor(config) {
     this.url = config.url;
@@ -22,14 +15,7 @@ export default class Api {
   getPlaces() {
     return fetch(`${this.url}/cards`, {
       headers: this.headers,
-    })
-      .then(checkPromise)
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkPromise);
   }
 
   newPlace() {
@@ -40,26 +26,16 @@ export default class Api {
         name: inputNamePlace.value,
         link: inputLinkPlace.value,
       }),
-    })
-      .then(checkPromise)
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkPromise);
   }
 
   getUserInfo() {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
     })
-      .then(checkPromise)
+      .then(this._checkPromise)
       .then((data) => {
         return data;
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
 
@@ -72,12 +48,9 @@ export default class Api {
         about: jobInput.value,
       }),
     })
-      .then(checkPromise)
+      .then(this._checkPromise)
       .then((data) => {
         return data;
-      })
-      .catch((err) => {
-        console.log(err);
       });
   }
 
@@ -88,43 +61,34 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatarLinkInput.value,
       }),
-    })
-      .then(checkPromise)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkPromise);
   }
 
   addLike(cardId) {
     return fetch(`${this.url}/cards/likes/${cardId}`, {
       method: "PUT",
       headers: this.headers,
-    })
-      .then(checkPromise)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkPromise);
   }
 
   removeLike(cardId) {
     return fetch(`${this.url}/cards/likes/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-    })
-      .then(checkPromise)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkPromise);
   }
 
   deleteCard(cardId) {
     return fetch(`${this.url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this.headers,
-    })
-      .then(checkPromise)
-      .catch((err) => {
-        console.log(err);
-      });
+    }).then(this._checkPromise);
+  }
+
+  _checkPromise(res) {
+    if (!res.ok) {
+      Promise.reject(`Error ${res.status}`);
+    }
+    return res.json();
   }
 }

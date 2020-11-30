@@ -76,8 +76,8 @@ api.getUserInfo().then((data) => {
 });
 
 // GET PLACES FROM SERVER
-api.getPlaces().then((data) => {
-  const initialPlaces = data;
+api.getPlaces().then((res) => {
+  const initialPlaces = res;
   const serverPlaceList = new Section(
     {
       items: initialPlaces,
