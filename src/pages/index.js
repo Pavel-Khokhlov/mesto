@@ -1,7 +1,6 @@
 import "./index.css";
 
 import {
-  popupElement,
   placeTemplate,
   placesList,
   nameProfile,
@@ -19,7 +18,6 @@ import {
 
 import Card from "../components/card.js";
 import Section from "../components/section.js";
-import Popup from "../components/popup.js";
 import UserInfo from "../components/userInfo.js";
 import PopupWithImage from "../components/popupWithImage.js";
 import PopupWithForm from "../components/popupWithForm.js";
@@ -28,9 +26,6 @@ import FormValidator from "../components/formValidator.js";
 import Api from "../components/api.js";
 
 // POPUPS
-const popup = new Popup(popupElement);
-popup.setEventListeners();
-
 const zoomPopup = new PopupWithImage(popupZoomImg);
 zoomPopup.setEventListeners();
 

@@ -1,4 +1,5 @@
 // CLASS
+export const scrollOff = "root_scroll-disabled";
 export const popupOpened = "popup_opened";
 export const placeLikeActive = "place__like-btn_active";
 export const inputInvalidClass = "popup__input_invalid";
@@ -30,6 +31,7 @@ export const elementFormProfile = document.querySelector(".popup_edit-profile");
 export const elementFormAvatar = document.querySelector(".popup_edit-avatar");
 
 // SELECTORS
+export const root = ".root";
 export const placesList = ".places";
 export const placeTemplate = ".place-template";
 export const placeLikeBtn = ".place__like-btn";

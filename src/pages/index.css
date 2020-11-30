@@ -13,5 +13,6 @@
 @import url(../blocks/popup/popup.css);
 @import url(../blocks/popup-zoom/popup-zoom.css);
 
+@import url(../blocks/root/_scroll-disabled/root_scroll-disabled.css);
 @import url(../blocks/popup/_opened/popup_opened.css);
 @import url(../blocks/place/__del-btn/_disable/place__del-btn_disable.css);
