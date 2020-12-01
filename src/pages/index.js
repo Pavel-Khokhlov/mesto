@@ -67,12 +67,12 @@ const handleLikeClick = (card) => {
 };
 
 // GET USER INFO FROM SERVER
-api.getUserInfo().then((data) => {
-  nameProfile.textContent = data.name;
-  jobProfile.textContent = data.about;
-  userAvatar.alt = data.name;
-  userAvatar.src = data.avatar;
-  nameProfile.id = data._id;
+api.getUserInfo().then((res) => {
+  nameProfile.textContent = res.name;
+  jobProfile.textContent = res.about;
+  userAvatar.alt = res.name;
+  userAvatar.src = res.avatar;
+  nameProfile.id = res._id;
 });
 
 // GET PLACES FROM SERVER
@@ -136,13 +136,17 @@ const handleDelClick = (element, card) => {
     popupSelector: formConfirmDelPlace,
     handleSubmitYes: () => {
       confirmDelPlace.changeBtnText();
-      api.deleteCard(cardId).then((res) => {
-        console.log(res);
-      }).then(() => {
-        placeElement.remove();
-      }).then(() => {
-        confirmDelPlace.close();
-      })
+      api
+        .deleteCard(cardId)
+        .then((res) => {
+          console.log(res);
+        })
+        .then(() => {
+          placeElement.remove();
+        })
+        .then(() => {
+          confirmDelPlace.close();
+        });
     },
   });
   confirmDelPlace.open();
@@ -173,7 +177,7 @@ editProfileForm.setEventListeners();
 
 buttonEditProfile.addEventListener("click", () => {
   formProfileValidator.resetErrorState();
-  userProfile.getUserInfo();
+  editProfileForm.setInputValues(userProfile.getUserInfo());
   editProfileForm.open();
 });
 

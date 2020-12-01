@@ -1,11 +1,13 @@
 import Popup from "./popup.js";
-import { inputSelector } from "../utils/constants.js";
+import { inputSelector, nameInput, jobInput } from "../utils/constants.js";
 
 export default class PopupWithForm extends Popup {
   constructor({ popupSelector, handleFormSubmit }) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
     this._inputList = this._popupForm.querySelectorAll(inputSelector);
+    this._nameInput = nameInput;
+    this._jobInput = jobInput;
   }
 
   _getInputValues() {
@@ -15,7 +17,12 @@ export default class PopupWithForm extends Popup {
     );
     return this._formValues;
   }
-  
+
+  setInputValues({ name, about }) {
+    this._nameInput.value = name;
+    this._jobInput.value = about;
+  }
+
   changeBtnText() {
     this._submitBtn.textContent = `Сохранение...`;
   }
