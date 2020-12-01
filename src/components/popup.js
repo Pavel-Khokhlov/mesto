@@ -4,12 +4,14 @@ import {
   popupElement,
   popupOpened,
   popupCloseBtn,
+  submitButton,
 } from "../utils/constants.js";
 export default class Popup {
   constructor(popupSelector) {
     this._root = document.querySelector(root);
     this._popupForm = document.querySelector(popupSelector);
     this._popup = this._popupForm.closest(popupElement);
+    this._submitBtn = this._popupForm.querySelector(submitButton);
     this.close = this.close.bind(this);
     this._overlayElement = null;
     this.handleEscClose = this.handleEscClose.bind(this);

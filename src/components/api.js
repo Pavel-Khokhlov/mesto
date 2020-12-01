@@ -32,11 +32,7 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this.url}/users/me`, {
       headers: this.headers,
-    })
-      .then(this._checkPromise)
-      .then((data) => {
-        return data;
-      });
+    }).then(this._checkPromise);
   }
 
   patchUserInfo() {
@@ -47,11 +43,7 @@ export default class Api {
         name: nameInput.value,
         about: jobInput.value,
       }),
-    })
-      .then(this._checkPromise)
-      .then((data) => {
-        return data;
-      });
+    }).then(this._checkPromise);
   }
 
   patchUserAvatar() {
