@@ -24,6 +24,10 @@ import PopupWithConfirm from "../components/popupWithConfirm.js";
 import FormValidator from "../components/formValidator.js";
 import Api from "../components/api.js";
 
+const catchErr = (res) => {
+  alert(`Всё идёт не по плану. ${res.status}`);
+};
+
 // POPUPS
 const zoomPopup = new PopupWithImage(popupZoomImg);
 zoomPopup.setEventListeners();
@@ -55,29 +59,37 @@ const api = new Api({
 const handleLikeClick = (card) => {
   const cardId = card._cardId;
   if (card.isLiked()) {
-    api.removeLike(cardId).then((res) => {
-      card.toggleLike(res);
-    });
+    api
+      .removeLike(cardId)
+      .then((res) => {
+        card.toggleLike(res);
+      })
+      .catch(catchErr);
   } else {
-    api.addLike(cardId).then((res) => {
-      card.toggleLike(res);
-    });
+    api
+      .addLike(cardId)
+      .then((res) => {
+        card.toggleLike(res);
+      })
+      .catch(catchErr);
   }
 };
 
-Promise.all([api.getUserInfo(), api.getPlaces()]).then(([userRes, cardRes]) => {
-  userProfile.setUserInfo(userRes);
-  userProfile.setUserAvatar(userRes);
-  nameProfile.id = userRes._id;
-  const cardsArr = cardRes.map(({ name, link, owner, _id, likes }) => ({
-    name,
-    link,
-    owner,
-    _id,
-    likes,
-  }));
-  serverPlaceList.renderPlaces(cardsArr);
-});
+Promise.all([api.getUserInfo(), api.getPlaces()])
+  .then(([userRes, cardRes]) => {
+    userProfile.setUserInfo(userRes);
+    userProfile.setUserAvatar(userRes);
+    nameProfile.id = userRes._id;
+    const cardsArr = cardRes.map(({ name, link, owner, _id, likes }) => ({
+      name,
+      link,
+      owner,
+      _id,
+      likes,
+    }));
+    serverPlaceList.renderPlaces(cardsArr);
+  })
+  .catch(catchErr);
 
 const createCard = (card) => {
   const newCard = new Card(
@@ -120,7 +132,8 @@ const newPlaceForm = new PopupWithForm({
       })
       .then(() => {
         newPlaceForm.close();
-      });
+      })
+      .catch(catchErr);
   },
 });
 newPlaceForm.setEventListeners();
@@ -131,28 +144,28 @@ buttonAddPlace.addEventListener("click", () => {
 });
 
 // DELETE PLACE
+const confirmDelPlace = new PopupWithConfirm(formConfirmDelPlace);
+confirmDelPlace.setEventListeners();
+
 const handleDelClick = (element, card) => {
   const placeElement = element;
   const cardId = card;
-  const confirmDelPlace = new PopupWithConfirm({
-    popupSelector: formConfirmDelPlace,
-    handleSubmitYes: () => {
-      confirmDelPlace.changeBtnText();
-      api
-        .deleteCard(cardId)
-        .then((res) => {
-          console.log(res);
-        })
-        .then(() => {
-          placeElement.remove();
-        })
-        .then(() => {
-          confirmDelPlace.close();
-        });
-    },
-  });
   confirmDelPlace.open();
-  confirmDelPlace.setEventListeners();
+  confirmDelPlace.changeConfirmHandler(() => {
+    confirmDelPlace.changeBtnText();
+    api
+      .deleteCard(cardId)
+      .then((res) => {
+        return res;
+      })
+      .then(() => {
+        placeElement.remove();
+      })
+      .then(() => {
+        confirmDelPlace.close();
+      })
+      .catch(catchErr);
+  });
 };
 
 // EDIT USER INFO
@@ -172,7 +185,8 @@ const editProfileForm = new PopupWithForm({
       })
       .then(() => {
         editProfileForm.close();
-      });
+      })
+      .catch(catchErr);
   },
 });
 editProfileForm.setEventListeners();
@@ -195,7 +209,8 @@ const updateAvatar = new PopupWithForm({
       })
       .then(() => {
         updateAvatar.close();
-      });
+      })
+      .catch(catchErr);
   },
 });
 updateAvatar.setEventListeners();

@@ -1,9 +1,12 @@
 import Popup from "./popup.js";
 
 export default class PopupWithConfirm extends Popup {
-  constructor({ popupSelector, handleSubmitYes }) {
+  constructor(popupSelector) {
     super(popupSelector);
-    this._handleSubmitYes = handleSubmitYes;
+  }
+
+  changeConfirmHandler(handler) {
+    this._handleSubmitYes = handler;
   }
 
   changeBtnText() {
