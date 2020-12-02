@@ -10,7 +10,13 @@ import {
 } from "../utils/constants.js";
 
 export default class Card {
-  constructor(card, selector, handleCardClick, handleLikeClick, handleDelClick) {
+  constructor(
+    card,
+    selector,
+    handleCardClick,
+    handleLikeClick,
+    handleDelClick
+  ) {
     this._name = card.name;
     this._link = card.link;
     this._likes = card.likes;
@@ -43,7 +49,7 @@ export default class Card {
   }
 
   isLiked() {
-    !!this._likes.find(({ _id }) => _id === nameProfile.id);
+    return !!this._likes.find(({ _id }) => _id === nameProfile.id);
   }
 
   _handleZoomImage(name, link) {
@@ -83,7 +89,7 @@ export default class Card {
     }
 
     // SET ACTIVE TO MY LIKES
-    if (!!this._likes.find(({ _id }) => _id === nameProfile.id)) {
+    if (this.isLiked()) {
       this._likeButton.classList.add(placeLikeActive);
     } else {
       this._likeButton.classList.remove(placeLikeActive);

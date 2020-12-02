@@ -54,9 +54,8 @@ const api = new Api({
 // LIKES
 const handleLikeClick = (card) => {
   const cardId = card._cardId;
-  if (!!card.isLiked === true) {
+  if (card.isLiked()) {
     api.removeLike(cardId).then((res) => {
-      console.log(res.likes.length);
       card.toggleLike(res);
     });
   } else {
