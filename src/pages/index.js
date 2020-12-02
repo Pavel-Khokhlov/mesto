@@ -5,7 +5,6 @@ import {
   placesList,
   nameProfile,
   jobProfile,
-  userAvatar,
   popupZoomImg,
   formProfile,
   formAvatar,
@@ -54,49 +53,53 @@ const api = new Api({
 
 // LIKES
 const handleLikeClick = (card) => {
-  const placeId = card._cardId;
-  if (card._likes.find((item) => item._id === nameProfile.id)) {
-    api.removeLike(placeId).then((res) => {
+  const cardId = card._cardId;
+  if (!!card.isLiked === true) {
+    api.removeLike(cardId).then((res) => {
+      console.log(res.likes.length);
       card.toggleLike(res);
     });
   } else {
-    api.addLike(placeId).then((res) => {
+    api.addLike(cardId).then((res) => {
       card.toggleLike(res);
     });
   }
 };
 
-// GET USER INFO FROM SERVER
-api.getUserInfo().then((res) => {
-  nameProfile.textContent = res.name;
-  jobProfile.textContent = res.about;
-  userAvatar.alt = res.name;
-  userAvatar.src = res.avatar;
-  nameProfile.id = res._id;
+Promise.all([api.getUserInfo(), api.getPlaces()]).then(([userRes, cardRes]) => {
+  userProfile.setUserInfo(userRes);
+  userProfile.setUserAvatar(userRes);
+  nameProfile.id = userRes._id;
+  const cardsArr = cardRes.map(({ name, link, owner, _id, likes }) => ({
+    name,
+    link,
+    owner,
+    _id,
+    likes,
+  }));
+  serverPlaceList.renderPlaces(cardsArr);
 });
 
-// GET PLACES FROM SERVER
-api.getPlaces().then((res) => {
-  const initialPlaces = res;
-  const serverPlaceList = new Section(
-    {
-      items: initialPlaces,
-      renderer: (item) => {
-        const card = new Card(
-          item,
-          placeTemplate,
-          openZoomPopup,
-          handleLikeClick,
-          handleDelClick
-        );
-        const placeElement = card.generatePlace();
-        serverPlaceList.addItem(placeElement);
-      },
-    },
-    placesList
+const createCard = (card) => {
+  const newCard = new Card(
+    card,
+    placeTemplate,
+    openZoomPopup,
+    handleLikeClick,
+    handleDelClick
   );
-  serverPlaceList.renderPlaces();
-});
+  const placeElement = newCard.generatePlace();
+  serverPlaceList.addItem(placeElement);
+};
+
+const serverPlaceList = new Section(
+  {
+    renderer: (card) => {
+      createCard(card);
+    },
+  },
+  placesList
+);
 
 // ADD NEW PLACE
 const newPlaceForm = new PopupWithForm({
@@ -114,7 +117,7 @@ const newPlaceForm = new PopupWithForm({
           handleDelClick
         );
         const placeElement = card.generatePlace();
-        document.querySelector(placesList).prepend(placeElement);
+        serverPlaceList.newItem(placeElement);
       })
       .then(() => {
         newPlaceForm.close();

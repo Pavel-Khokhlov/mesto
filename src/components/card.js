@@ -10,19 +10,13 @@ import {
 } from "../utils/constants.js";
 
 export default class Card {
-  constructor(
-    res,
-    selector,
-    handleCardClick,
-    handleLikeClick,
-    handleDelClick
-  ) {
-    this._name = res.name;
-    this._link = res.link;
-    this._likes = res.likes;
-    this._cardId = res._id;
+  constructor(card, selector, handleCardClick, handleLikeClick, handleDelClick) {
+    this._name = card.name;
+    this._link = card.link;
+    this._likes = card.likes;
+    this._cardId = card._id;
     this._userId = nameProfile.id;
-    this._owner = res.owner._id;
+    this._ownerId = card.owner._id;
     this._selector = selector;
     this._handleCardClick = handleCardClick;
     this._handleLikeClick = handleLikeClick;
@@ -48,6 +42,10 @@ export default class Card {
     this._likes = res.likes;
   }
 
+  isLiked() {
+    !!this._likes.find(({ _id }) => _id === nameProfile.id);
+  }
+
   _handleZoomImage(name, link) {
     this._handleCardClick(name, link);
   }
@@ -58,7 +56,9 @@ export default class Card {
 
   _setEventsListeners() {
     this._likeButton.addEventListener("click", () => this._handleLiked());
-    this._delButton.addEventListener("click", () => this._handleDelete(this._element, this._cardId));
+    this._delButton.addEventListener("click", () =>
+      this._handleDelete(this._element, this._cardId)
+    );
     this._image.addEventListener("click", () =>
       this._handleZoomImage(this._name, this._link)
     );
@@ -76,7 +76,7 @@ export default class Card {
     this._likeCount.textContent = this._likes.length;
 
     // SET DELETE BTN TO MY CARD
-    if (this._owner === this._userId) {
+    if (this._ownerId === this._userId) {
       this._delButton.classList.remove(disableDeleteBtn);
     } else {
       this._delButton.classList.add(disableDeleteBtn);
