@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/Pavel-Khokhlov/mesto/issues"
   },
-  "homepage": "https://PavelKhokhlov.github.io/mesto/",
+  "homepage": "https://pavel-khokhlov.github.io/mesto/index.html",
   "devDependencies": {
     "@babel/core": "^7.10.2",
     "@babel/preset-env": "^7.10.2",
