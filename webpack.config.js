@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: "main.js",
     path: path.resolve(__dirname, "dist"),
-    publicPath: "./",
+    publicPath: "http://pavel-khokhlov.github.io/mesto",
   },
 
   module: {
