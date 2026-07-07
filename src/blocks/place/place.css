@@ -9,7 +9,10 @@
 .place {
   position: relative;
   margin: 0;
-  max-width: 282px;
+  width: 100%;
   background-color: #fff;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

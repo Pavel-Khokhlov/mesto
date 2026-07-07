@@ -19,6 +19,6 @@
 
 @media only screen and (max-width: 617px) {
   .places {
-    grid-template-columns: 282px;
+    grid-template-columns: 90%;
   }
 }

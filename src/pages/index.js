@@ -75,6 +75,15 @@ const handleLikeClick = (card) => {
   }
 };
 
+/* const checkImage = (url) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.onload = () => resolve(true);
+    img.onerror = () => resolve(false);
+    img.src = url;
+  });
+}; */
+
 Promise.all([api.getUserInfo(), api.getPlaces()])
   .then(([userRes, cardRes]) => {
     userProfile.setUserInfo(userRes);
@@ -83,10 +92,11 @@ Promise.all([api.getUserInfo(), api.getPlaces()])
     const cardsArr = cardRes.map(({ name, link, owner, _id, likes }) => ({
       name,
       link,
-      owner,
+      owner, 
       _id,
       likes,
     }));
+    console.log("cardsArr", cardsArr);
     serverPlaceList.renderPlaces(cardsArr);
   })
   .catch(catchErr);
@@ -97,7 +107,7 @@ const createCard = (card) => {
     placeTemplate,
     openZoomPopup,
     handleLikeClick,
-    handleDelClick
+    handleDelClick,
   );
   const placeElement = newCard.generatePlace();
   serverPlaceList.addItem(placeElement);
@@ -109,7 +119,7 @@ const serverPlaceList = new Section(
       createCard(card);
     },
   },
-  placesList
+  placesList,
 );
 
 // ADD NEW PLACE
@@ -125,7 +135,7 @@ const newPlaceForm = new PopupWithForm({
           placeTemplate,
           openZoomPopup,
           handleLikeClick,
-          handleDelClick
+          handleDelClick,
         );
         const placeElement = card.generatePlace();
         serverPlaceList.newItem(placeElement);
